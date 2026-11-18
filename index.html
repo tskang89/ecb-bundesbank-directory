@@ -1,0 +1,747 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ECB · Bundesbank 조직 디렉터리</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: sticky header with institution tabs + search; board members as columns of collapsible unit cards; contacts as tables */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --ink:#16202c; --muted:#5b6675; --line:#dde2e9;
+  --ecb:#1f3f8f; --ecb-soft:#e7ecf8; --bbk:#0f6b62; --bbk-soft:#e2f1ee; --warn:#8a5a00; --warn-soft:#fbf1dc;
+  --mark:#ffe58a;
+  --f-sans:"IBM Plex Sans","IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151c; --surface:#18202a; --ink:#e6ebf1; --muted:#9aa6b4; --line:#2a3542;
+  --ecb:#8fa9ec; --ecb-soft:#1d2a47; --bbk:#6cc9bb; --bbk-soft:#14322e; --warn:#e7b960; --warn-soft:#3a2d12; --mark:#6b5a12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151c; --surface:#18202a; --ink:#e6ebf1; --muted:#9aa6b4; --line:#2a3542;
+  --ecb:#8fa9ec; --ecb-soft:#1d2a47; --bbk:#6cc9bb; --bbk-soft:#14322e; --warn:#e7b960; --warn-soft:#3a2d12; --mark:#6b5a12; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:14px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding-block:12px}
+h1{font-size:17px;font-weight:700;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1 small{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{padding:6px 12px;border-radius:6px;color:var(--muted);text-decoration:none;font-weight:600;font-size:13px;border:1px solid transparent}
+nav a:hover{color:var(--ink);border-color:var(--line)}
+nav a[aria-current="page"]{background:var(--ink);color:var(--surface)}
+.search{flex:1 1 220px;display:flex;gap:6px;min-width:0}
+.search input{flex:1;min-width:0;font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.search input:focus{outline:2px solid var(--ecb);outline-offset:1px}
+main .wrap{padding-block:20px 48px;display:flex;flex-direction:column;gap:28px}
+section[data-view]{display:flex;flex-direction:column;gap:22px}
+.intro{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between}
+.intro h2{margin:0;font-size:22px;letter-spacing:-.02em}
+.intro p{margin:0;color:var(--muted);max-width:70ch}
+.asof{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+h3.band{margin:0;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;gap:10px;align-items:center}
+h3.band::after{content:"";flex:1;height:1px;background:var(--line)}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-items:start}
+.member{background:var(--surface);border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;min-width:0}
+.member>.mh{padding:14px 16px 12px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.ecb .member>.mh{border-top:3px solid var(--ecb);border-radius:8px 8px 0 0}
+.bbk .member>.mh{border-top:3px solid var(--bbk);border-radius:8px 8px 0 0}
+.mh .name{font-size:16px;font-weight:700}
+.mh .role{font-size:12.5px;color:var(--muted)}
+.mh .term{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.units{display:flex;flex-direction:column}
+details.unit{border-top:1px solid var(--line)}
+details.unit:first-child{border-top:0}
+details.unit>summary{list-style:none;cursor:pointer;padding:10px 16px;display:grid;grid-template-columns:1fr auto;gap:2px 10px}
+details.unit>summary::-webkit-details-marker{display:none}
+details.unit>summary:focus-visible{outline:2px solid var(--ecb);outline-offset:-2px}
+.uname{font-weight:600;min-width:0}
+.uko{font-size:12px;color:var(--muted);font-weight:400}
+.chev{color:var(--muted);font-size:12px;align-self:start;transition:transform .15s}
+details[open]>summary .chev{transform:rotate(90deg)}
+.uhead{grid-column:1/-1;font-size:13px}
+.uhead b{font-weight:600}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.04em;padding:1px 6px;border-radius:4px;margin-right:6px;vertical-align:1px}
+.ecb .tag{background:var(--ecb-soft);color:var(--ecb)}
+.bbk .tag{background:var(--bbk-soft);color:var(--bbk)}
+.deps{grid-column:1/-1;font-size:12.5px;color:var(--muted)}
+.ubody{padding:0 16px 12px;display:flex;flex-direction:column;gap:6px}
+.subs{width:100%;border-collapse:collapse;font-size:12.5px}
+.subs td{padding:5px 0;border-top:1px dashed var(--line);vertical-align:top}
+.subs td:first-child{padding-right:10px;color:var(--muted);width:55%}
+.subs td:last-child{font-weight:500}
+.subs .dep{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.note{font-size:12px;color:var(--warn);background:var(--warn-soft);padding:6px 8px;border-radius:5px}
+.callout{background:var(--warn-soft);color:var(--ink);border-radius:8px;padding:12px 14px;font-size:13px;display:flex;flex-direction:column;gap:4px}
+.callout b{color:var(--warn)}
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+table.ct{border-collapse:collapse;width:100%;min-width:640px;font-size:13px}
+.ct th{text-align:left;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
+.ct td{padding:8px 12px;border-top:1px solid var(--line);vertical-align:top}
+.ct tr:first-child td{border-top:0}
+.mono{font-family:var(--f-mono);font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.copy{font:inherit;font-size:11px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:4px;padding:0 5px;margin-left:6px;cursor:pointer;vertical-align:1px}
+.copy:hover{color:var(--ink);border-color:var(--muted)}
+.copy:focus-visible{outline:2px solid var(--ecb)}
+.cards2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.box h4{margin:0;font-size:14px}
+.box dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
+.box dt{color:var(--muted)}
+.box dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.lead{margin:0;color:var(--muted);max-width:80ch}
+.box.hl{border-color:var(--ink);box-shadow:inset 0 3px 0 var(--ink)}
+.sources{font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.sources a{color:inherit}
+mark{background:var(--mark);color:inherit;border-radius:2px}
+.empty{color:var(--muted);font-size:13px;padding:8px 0}
+.hidden-by-search{display:none!important}
+.count{font-size:12px;color:var(--muted);white-space:nowrap}
+footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+.mtitle{display:none}
+@media (max-width:460px){.board{grid-template-columns:1fr}.cards2{grid-template-columns:1fr}}
+/* Phone: title scrolls away, only tabs + search stay pinned; tables become stacked cards */
+@media (max-width:700px){
+  .mtitle{display:block;background:var(--surface);font-size:16px;font-weight:700;padding-block:12px 4px}
+  .mtitle small{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+  header h1{display:none}
+  header .wrap{padding-block:8px;gap:8px}
+  nav{display:grid;grid-template-columns:repeat(4,1fr);width:100%;gap:4px}
+  nav a{text-align:center;padding:9px 4px;font-size:13.5px}
+  .search{flex-basis:100%}
+  .search input{font-size:16px;padding:9px 12px}
+  main .wrap{padding-block:16px 40px;gap:22px}
+  .intro h2{font-size:19px}
+  details.unit>summary{padding:12px 14px}
+  .ubody{padding:0 14px 12px}
+  .subs td:first-child{width:50%}
+  .copy{font-size:12px;padding:3px 8px;margin-left:8px;min-height:28px}
+  .tbl-wrap{overflow:visible;background:transparent;border:0;border-radius:0}
+  table.ct{min-width:0;display:block}
+  .ct thead{display:none}
+  .ct tbody{display:flex;flex-direction:column;gap:10px}
+  .ct tr{display:flex;flex-direction:column;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .ct td{display:grid;grid-template-columns:5.2em minmax(0,1fr) auto;gap:8px;padding:0;border:0;align-items:center}
+  .ct td .copy{margin-left:0}
+  .ct .mono{font-size:13px;font-family:var(--f-sans)}
+  .ct td::before{content:attr(data-label);font-size:11.5px;color:var(--muted)}
+  .ct td:first-child{display:block;font-size:15px;padding-bottom:2px}
+  .ct td:first-child::before{content:none}
+  .ct td[data-empty]{display:none}
+  .ct .mono{white-space:normal;overflow-wrap:anywhere}
+  .box dl{grid-template-columns:4.5em minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+</style>
+
+<div class="mtitle wrap" aria-hidden="true">ECB · Bundesbank 조직 디렉터리<small>조직 구조, 담당자, 공개 연락처</small></div>
+<header>
+  <div class="wrap">
+    <h1>ECB · Bundesbank 조직 디렉터리<small>조직 구조, 담당자, 공개 연락처</small></h1>
+    <nav aria-label="기관">
+      <a href="#ecb" data-nav="ecb">ECB</a>
+      <a href="#bbk" data-nav="bbk">Bundesbank</a>
+      <a href="#bok" data-nav="bok">한국은행</a>
+      <a href="#contacts" data-nav="contacts">연락처</a>
+    </nav>
+    <div class="search">
+      <input id="q" type="search" placeholder="이름·부서 검색 (예: Straub, Märkte, 통계)" aria-label="이름 또는 부서 검색" autocomplete="off">
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+</header>
+
+<main><div class="wrap">
+
+<section data-view="ecb" class="ecb">
+  <div class="intro">
+    <h2>European Central Bank</h2>
+    <span class="asof">관리자 명단 2026-10-01 기준 · 집행이사 업무분장 2026-06 기준</span>
+  </div>
+  <h3 class="band">집행이사회 (Executive Board) · 담당 부서</h3>
+  <div class="board" id="ecb-board"></div>
+  <h3 class="band">은행감독 (ECB Banking Supervision / SSM)</h3>
+  <div class="callout"><span><b>감독이사회(Supervisory Board) ECB 측 구성원</b></span><span id="ssm-board"></span></div>
+  <div class="board" id="ecb-ssm"></div>
+</section>
+
+<section data-view="bbk" class="bbk">
+  <div class="intro">
+    <h2>Deutsche Bundesbank</h2>
+    <span class="asof">이사회 담당분야 2026-11 기준 · 부서장 2026-08-01 조직도 기준</span>
+  </div>
+  <div class="callout"><span><b>이사 교체</b> Burkhard Balz 이사(제3국) 후임으로 Dr. Philipp Nimmermann이 2026년 11월 취임. 2026-08-01 조직도에는 아직 Balz로 표기되어 있음.</span></div>
+  <h3 class="band">이사회 (Vorstand) · 담당 중앙부서</h3>
+  <div class="board" id="bbk-board"></div>
+  <h3 class="band">지역본부 (Hauptverwaltungen) 9곳</h3>
+  <div class="tbl-wrap"><table class="ct" id="hv"><thead><tr><th>지역본부</th><th>본부장</th><th>재임</th><th>주소</th><th>우편</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section data-view="bok" class="bok">
+  <div class="intro">
+    <h2>한국은행 관련 담당자</h2>
+    <span class="asof">2026-11-18 수집</span>
+  </div>
+  <p class="lead">한국은행 국외사무소, 그리고 ECB·Bundesbank에서 한국은행과의 협력 또는 한국계 금융기관 업무를 맡는 부서입니다. 양 기관은 "한국 담당자"를 따로 공개하지 않으므로, Bundesbank 도쿄 대표부처럼 한국을 명시적으로 담당하는 곳 외에는 소관 업무 기준으로 정리했습니다.</p>
+  <h3 class="band">한국은행 유럽 사무소</h3>
+  <div class="cards2" id="bok-eu"></div>
+  <h3 class="band">ECB·Bundesbank의 한국은행 관련 창구</h3>
+  <div class="tbl-wrap"><table class="ct" id="bok-cp"><thead><tr><th>기관</th><th>부서</th><th>책임자</th><th>한국은행과의 관련</th><th>연락 경로</th></tr></thead><tbody></tbody></table></div>
+  <h3 class="band">독일 소재 한국계 금융기관 감독 관련</h3>
+  <div class="tbl-wrap"><table class="ct" id="bok-sup"><thead><tr><th>기관</th><th>부서</th><th>책임자</th><th>역할</th></tr></thead><tbody></tbody></table></div>
+  <h3 class="band">한국은행 기타 국외사무소</h3>
+  <div class="tbl-wrap"><table class="ct" id="bok-other"><thead><tr><th>사무소</th><th>책임자</th><th>주소</th><th>전화</th><th>이메일</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section data-view="contacts">
+  <div class="intro">
+    <h2>공개 연락처</h2>
+    <p>각 기관 웹사이트에 공개된 대표·언론 연락처입니다. 개별 부서장의 직통 번호와 이메일은 공개되지 않으므로 대표번호나 문의 양식을 이용합니다.</p>
+  </div>
+  <h3 class="band">기관 대표 연락처</h3>
+  <div class="cards2" id="general"></div>
+  <h3 class="band">ECB 공보실 (Press office)</h3>
+  <div class="tbl-wrap"><table class="ct" id="ecb-press"><thead><tr><th>이름</th><th>직책</th><th>이메일</th><th>사무실</th><th>휴대전화</th></tr></thead><tbody></tbody></table></div>
+  <h3 class="band">Bundesbank 공보실 (Pressestelle)</h3>
+  <div class="tbl-wrap"><table class="ct" id="bbk-press"><thead><tr><th>이름</th><th>직책</th><th>이메일</th><th>사무실</th><th>휴대전화</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<div class="sources" id="sources"></div>
+</div></main>
+<footer><div class="wrap">2026-11-18 수집. 공개 웹페이지와 PDF에서 옮긴 자료로, 인사 이동이 잦으므로 연락 전 원문을 확인하십시오. 부서 하위 조직의 책임자 배치는 조직도 PDF 텍스트를 순서대로 대응시킨 것이며, 대응이 불명확한 경우 이름만 나열했습니다.</div></footer>
+
+<script>
+// ---------- DATA ----------
+// unit: {n:name, ko, t:title-of-head, h:head, d:[deputies], s:[[subunit, head, deputy]], note}
+const ECB_BOARD = [
+ {name:"Christine Lagarde", role:"총재 (President)", term:"2019-11-01 ~ 2027-10-31", units:[
+  {n:"Chief Services Office", ko:"최고서비스책임자 (총재 경유 보고)", t:"CSO", h:"Myriam Moufakkir", note:"인사·IT·총무 부서를 총괄 (아래 'Chief Services Officer' 참조)"},
+  {n:"DG Secretariat", ko:"사무국", t:"DG", h:"Petra Senkovic", s:[["Secretariat Division","Nicolas Gauthier"],["Information Governance Division","Evangelia Kargianioti"],["Knowledge Solutions Section","Sylvie Beausuroy"]]},
+  {n:"Compliance and Governance Office", ko:"준법·지배구조실", t:"CCGO", h:"Roman Schremser", s:[["Compliance and Governance Division","Marguerite-Louise Karydi"]]},
+  {n:"DG Communications", ko:"커뮤니케이션국", t:"DG", h:"Wolfgang Proissl", d:["Thierry Bracke","Conny Lotze"], s:[
+   ["Newsroom Division","Paul Gordon","Uta Harnischfeger, Eszter Miltényi-Torstensson"],
+   ["Design & Digital Division","Stefania Secola","Lydia de Jongh-Veneman"],
+   ["Public Communication Division","Torsten Busse","Ronan Sheridan"],
+   ["Strategic Communication Section","Eva Taylor"],
+   ["Language Services Division","Rossana Villani"],
+   ["Language Services – Board & Media Section","Denise Scott"],
+   ["Language Services – Publications Section","Virge Juurikas"],
+   ["Language Services – Public Outreach Section","Marcello Di Pietro"],
+   ["Language Support & Innovation Section","Tom Sanders"]]},
+  {n:"ESRB Secretariat", ko:"유럽시스템리스크위원회 사무국", t:"Head", h:"Francesco Mazzaferro", d:["Tuomas Peltonen"]},
+  {n:"Directorate Internal Audit", ko:"내부감사실", t:"Director", h:"Banafsheh Geretzki", s:[
+   ["Independent Internal Investigations","Carin Pronk","Emanuela Carlini"],
+   ["Audit Missions 1","Aristeidis Xarchas","Alejandro Alvarez Rodriguez"],
+   ["Audit Missions 2","Kevin Yeung","Martin Dressler"]]},
+  {n:"Counsel to the Executive Board", ko:"집행이사회 자문실", t:"Principal Coordinator", h:"Isabel Vansteenkiste", s:[
+   ["Climate Change Centre","Irene Heemskerk","Giuseppe Barillà"],
+   ["Data Protection Office (DPO)","Maarten G.A. Daman"]]}
+ ]},
+ {name:"Boris Vujčić", role:"부총재 (Vice-President)", term:"2026-06-01 ~ 2034-05-31", units:[
+  {n:"DG Macroprudential Policy & Financial Stability", ko:"거시건전성정책·금융안정국", t:"DG", h:"Cornelia Holthausen", d:["John Fell","Livio Stracca"], s:[
+   ["Macroprudential Policy Division","Carsten Detken","Lorenzo Cappiello"],
+   ["Systemic Risk & Financial Institutions Division","Edward O’Brien","Desislava Andreeva"],
+   ["Stress Test Modelling Division","Katrin Assenmacher","Constanza Maria Rodriguez d’Acri"],
+   ["Financial Regulation & Policy Division","Anton van der Kraaij","Michael Wedow"],
+   ["Market-based Finance Division","Regine Wölfinger","Julija Jakovicka"]]},
+  {n:"Directorate Risk Management", ko:"리스크관리실 (운영리스크 포함)", t:"Director", h:"Fernando Monar Lora", s:[
+   ["Risk Analysis Division","Thomas Werner","Siobhán Agnes Devin"],
+   ["Risk Strategy Division","Elke Heinle","Vesela Ivanova"],
+   ["Operational Risk & Business Continuity","Andreas Burgstaller"]]}
+ ]},
+ {name:"Philip R. Lane", role:"집행이사 · 수석이코노미스트", term:"2019-06-01 ~ 2027-05-31", units:[
+  {n:"DG Economics", ko:"경제국", t:"DG", h:"Oscar Arce", d:["Christiane Nickel","Philipp Hartmann"], s:[
+   ["Forecasting and Policy Modelling Division","Matteo Ciccarelli","Marta Banbura"],
+   ["Business Cycle Analysis Division","Beatrice Pierluigi","Thomas Warmedinger"],
+   ["Euro Area External Sector & Euro Adoption Division","David Lodge","Martin Bijsterbosch"],
+   ["Fiscal Policies Division","Nadine Leiner-Killinger"],
+   ["Fiscal Analysis Section","Vilém Valenta"],
+   ["Fiscal Surveillance Section","Philipp Rother"],
+   ["Supply Side, Labour & Surveillance Division","David Sondermann"],
+   ["Prices & Costs Division","Sarah Holton","Elena Bobeica"]]},
+  {n:"DG Monetary Policy", ko:"통화정책국", t:"DG", h:"Roland Straub", s:[
+   ["Capital Markets/Financial Structure Division","Simone Manganelli","Carlo Altavilla, Ursel Baumann"],
+   ["Monetary Analysis Division / Money, Credit & Financial Accounts Section","Sujit Kapadia, Miguel Boucinha"],
+   ["Bank Lending Conditions Section","Lorenzo Burlon"],
+   ["Monetary Policy Strategy – Policy Assessment Section","Fabian Eser"],
+   ["Monetary Policy Strategy – Strategy Issues Section","Claus Brand"]],
+   note:"Monetary Analysis·Strategy 부서장 배치는 원문 표에서 불명확"},
+  {n:"Budgeting & Controlling Division", ko:"예산·통제 (Corporate Services/Finance 소속)", t:"Head", h:"Nora Panyik", d:["Dominika Ryzner"]}
+ ]},
+ {name:"Isabel Schnabel", role:"집행이사", term:"2020-01-01 ~ 2027-12-31", units:[
+  {n:"DG Market Operations", ko:"시장운영국", t:"DG", h:"Imène Rahmouni-Rousseau", d:["Isabel von Köppen-Mertes"], s:[
+   ["Financial Operations Services Division","M. Isabel Lopes Soares","Françoise Jaulin"],
+   ["Cross Market Analysis & Intelligence","Tobias Linzert","Lia Vaz Cruz"],
+   ["Liquidity & Investments","Emily Witt"],
+   ["Domestic Markets Section","Angelika Lagerblom"],
+   ["International Markets Section","Lieven Hermans"],
+   ["Market Operations Frameworks","Alessandro Calza"],
+   ["Collateral Framework and Climate Section","Evangelos Tabakis"],
+   ["Frameworks and Balance Sheet Section","Ralph Weidenfeller"],
+   ["Market Operations Solutions and Innovation","Christophe Beuve","Colm Toolin"]]},
+  {n:"DG Research", ko:"연구국", t:"DG", h:"Luc Laeven", d:["João Sousa"], s:[
+   ["Monetary Policy Research Division","Michele Lenza"],
+   ["Macroeconomics Section","Geoff Kenny"],
+   ["Monetary Economics Section","Caterina Mendicino"],
+   ["Financial Research Division","Marie Hoerova"],
+   ["Financial Intermediation Research Section","Kalin Nikolov"],
+   ["Financial Markets Research Section","Angela Maddaloni"]]},
+  {n:"DG Statistics", ko:"통계국 (DG = Chief Data Officer)", t:"DG", h:"Claudia Mann", d:["Caroline Willeke","Remigio Echeverria"], s:[
+   ["Analytical Credit & Master Data Division","Alessandro Bonara"],
+   ["Analytical Credit Data Section","Riccardo Bonci"],
+   ["Master- & Meta Data Section","Violetta Damia"],
+   ["Securities & Financial Markets Data Division","Romain Vagner"],
+   ["Financial Market Data & Services Section","Javier Huerga Aramburu"],
+   ["Banking Supervision Data Division","Giancarlo Pellizzari"],
+   ["Supervisory Data Management Section","Catherine Ahsbahs"],
+   ["Supervisory Data Services Section","Dara McKiernan"],
+   ["Monetary & Economic Statistics Division","Olga Monteiro"],
+   ["Monetary Statistics Section","Rodrigo Oliveira-Soares"],
+   ["Financial Statistics Section","Isabel Kerner"],
+   ["Economic Statistics Section","Romana Peronaci"],
+   ["External Statistics & Sector Accounts Division","Nuno Teixeira da Silva"],
+   ["External Statistics Section","Jorge Diz Dias"],
+   ["Statistical Applications & Tools Division","Sébastien Pérez-Duarte"],
+   ["Statistical Applications Section","Juan Alberto Sanchez"],
+   ["Integrated Reporting Framework","Frank Mayerlen"]]}
+ ]},
+ {name:"Frank Elderson", role:"집행이사 · 감독이사회 부의장", term:"2020-12-15 ~ 2028-12-14", units:[
+  {n:"ECB Banking Supervision (부의장 자격)", ko:"감독 DG 6곳 + Supervisory Strategy & Risk", t:"Vice-Chair", h:"Frank Elderson", note:"아래 '은행감독' 구역 참조"},
+  {n:"DG Legal Services", ko:"법무국", t:"DG", h:"Chiara Zilioli", d:["Christian Kroppenstedt"], s:[
+   ["Institutional Law Division","Georg Gruber"],
+   ["Banknotes, Procurement, Accounting Law","Martin Benisch"],
+   ["Governance & Civil Service Law Section","Fabian von Lindeiner"],
+   ["Financial Law Division","Otto Heinz"],
+   ["Market Infrastructure Law Section","Bram van der Eem"],
+   ["Market Operations Law Section","Kestutis Laurinavicius"],
+   ["Legislation Division","Peter Pfeifhofer"],
+   ["Legal Revision Supervision Section","Tatyana Filipova"],
+   ["Legal Revision Central Banking Section","Eleni Koupepidou"],
+   ["Supervisory Law Division – Banking Law","Klaus Lackhoff"],
+   ["Supervisory Law Division – SSM Law","Alexander Karpf"]],
+   note:"2026-05-29 ECB 발표: Petra Senkovic 법무국장 임명(현 사무국장). 10월 명단에는 아직 Zilioli로 표기"}
+ ]},
+ {name:"Piero Cipollone", role:"집행이사", term:"2023-11-01 ~ 2031-10-31", units:[
+  {n:"DG International & European Relations", ko:"국제·유럽관계국", t:"DG", h:"Christophe Kamps", d:["Fátima Pires"], s:[
+   ["EU Institutions & Fora Division","Johannes Lindner","Daniel Kapp"],
+   ["International Policy Analysis Division","Stelios Makrydakis","Ine Hilde Van Robays"],
+   ["External Developments Division","Matthieu Darracq Pariès","Maria Grazia Attinasi"],
+   ["ECB Representation in Washington D.C.","Rasmus Rüffer (Principal Adviser)"],
+   ["ECB Representative Office in Brussels","Boris Kisselevsky (Principal Adviser)"]]},
+  {n:"DG Market Infrastructure & Payments", ko:"시장인프라·지급결제국", t:"DG", h:"Thomas Vlasopoulos", d:["Fiona van Echelpoel","Dimitri Pattyn"], s:[
+   ["Oversight Division","Simonetta Rosati","Beata Wróbel"],
+   ["Market Innovation and Integration Division","Holger Neuhaus","Karine Themejian"],
+   ["Market Infrastructure Management Division","Sylvain Debeaumont","Eirini Katsalirou"],
+   ["Market Infrastructure Development Division","Karen Birkel","Georgios Kalogeropoulos"],
+   ["Market Infrastructure Support Division","Francisco José Tur Hartmann"]]},
+  {n:"Directorate Digital Euro", ko:"디지털유로실 (MIP 소속)", t:"Director", h:"Evelien Witlox", s:[
+   ["Digital Euro Service Platform Division","Maria Teresa Arráez"],
+   ["Market Roll-Out Division","Björn Hoffmeyer"],
+   ["Positioning and Outreach Division","Ryan Gawn"],
+   ["Product Proposition Division","Daniel McLean"],
+   ["Rulebook Division","Patrick Papsdorf"],
+   ["Programme Execution Management Section","Harald Deinhammer"]]},
+  {n:"Directorate Banknotes", ko:"은행권실", t:"Director", h:"Doris Schneeberger", s:[
+   ["Banknote Circulation","Benjamin Sahel","Henk Esselink"],
+   ["Banknote Services Section","Sylvain Calluaud"],
+   ["Banknote Technology","Patricia Roa Tejero"],
+   ["New Banknotes Section","Philippe Geoffroy"],
+   ["Production Section","Markus Emerich"]]}
+ ]},
+ {name:"Myriam Moufakkir", role:"Chief Services Officer (집행이사 아님, 총재 경유 보고)", term:"", units:[
+  {n:"DG Corporate Services", ko:"경영지원국", t:"DG", h:"Roberto Schiavi", s:[
+   ["Directorate Finance","Anna Maria Bausback (Director)"],
+   ["Central Procurement Division","Eduard Boschner"],
+   ["Financial Accounting and Reporting Division","Juan Prieto Fernández"],
+   ["Accounting Section","Heiko Nordhausen"],
+   ["Financial Reporting Section","Konstantinos Apostolou"],
+   ["Directorate Administration","Cristina San Agapito (Director)"],
+   ["Administrative Services Division","Alessandro Sussex"],
+   ["Premises Division","Ralf Puntheller"],
+   ["Security & Safety Division","Marcus Kloock"]]},
+  {n:"DG Human Resources", ko:"인사국", t:"DG", h:"Eva Murciano", s:[
+   ["Partnering and Solutions / People Services / Digitalisation & Employee Relations","Eglantine Devaux, Marco Gabrielle, Victor Lopez Velasco, Kallia Tsitsibikou, Stefanie Lawson, Natália Trindade, Frederik Malfrère, Dennis Beermann"]],
+   note:"부서별 책임자 배치는 원문 표에서 불명확해 이름만 나열"},
+  {n:"DG Information Systems", ko:"정보시스템국", t:"DG", h:"Alain Busac", d:["Rafael Garcia Oliva","Daria Gostkowska"], s:[
+   ["Data and Analytics Services","Peter Lindlacher","Antonio Morlupi"],
+   ["Digital Security Services Division","Philipp Amann","Jan-Olaf Droese"],
+   ["Enterprise Services Division","Julie Anne Dubois","Sebastian Wolfgarten"],
+   ["Supervisory IT Services Division","Sertac Son","Victor Morilla, Afonso Vaz"],
+   ["Platform Engineering Services Division","Plamen Zyumbyulev","Maciej Brzezinski"],
+   ["Central Banking Services Division","Eleftheria Amilitou","Berta Naveira Fernandez, Jeremías Iglesias"],
+   ["End User Experience Services Division","Raoul De Mos","Christian Jäger, Pierre Chautard"]]},
+  {n:"Governance and Transformation Services Division", ko:"거버넌스·혁신", t:"Head", h:"Josef Pinhas"}
+ ]}
+];
+
+const ECB_SSM_BOARD = "Claudia Buch (의장, Chair) · Frank Elderson (부의장) · Sharon Donnery · Pedro Machado · Patrick Montagner · Anneli Tuominen (ECB 대표). 그 밖에 각국 감독당국 대표가 참여 (2025-07 페이지 기준).";
+
+const ECB_SSM = [
+ {name:"Claudia Buch", role:"감독이사회 의장 · 부의장 Frank Elderson과 공동 관할", term:"2024-01-01 ~ 2028-12-31", units:[
+  {n:"DG Systemic & International Banks", ko:"대형·국제은행 감독국", t:"DG", h:"Korbinian Ibel", d:["Paolo Corradino","Eleni Angelopoulou"], s:[
+   ["SIB Division 1","Germar Knöchlein"],["SIB Division 2","Jekaterina Titarenko"],["SIB Division 3","Rocío Ripoll Sánchez"],
+   ["SIB Division 4","Victor Luis Guerrero Gutierrez"],["SIB Division 5","Juan Blanc"],["SIB Division 6","Thomas Gstädtner"]]},
+  {n:"DG Universal & Diversified Institutions", ko:"겸업·다각화은행 감독국", t:"DG", h:"Thijs (Matthijs Willem) van Woerden", d:["Rolf Klug","Maria da Conceição Macedo"], s:[
+   ["UDI Division 1","Pierre Launay"],["UDI Division 2","Veerle De Vuyst"],["UDI Division 3","Stephen Woulfe"],
+   ["UDI Division 4","Laurent Mercier"],["UDI Division 5","Femmie Wijbrandi"],["UDI Division 6","Damiano Guadalupi"]]},
+  {n:"DG Specialised Institutions & LSIs", ko:"특수은행·덜 중요한 은행(LSI) 감독국", t:"DG", h:"Thomas Broeng Jorgensen", d:["Roberto Ugena Torrejón","Sofia Toscano Rico"], s:[
+   ["SIL Division 1","Stephanie Hecker"],["SIL Division 2","Marc Trausch"],["SIL Division 3","Giacomo Caviglia"],
+   ["SIL Division 4","Fabio Perata"],["SIL Division 5","Gil Jean-Baptiste"],["Institutional & Sectoral Oversight","Anne Fröhling"]]},
+  {n:"DG Horizontal Line Supervision", ko:"수평감독국 (리스크별 전문)", t:"DG", h:"Patrick Amis", d:["Torsti Silvonen","Anne Lécuyer"], s:[
+   ["Sustainable Banking & Governance","Katia Mastrodomenico"],
+   ["Traded Risks, ALM, Capital & Crisis","Armin Leistenschneider"],
+   ["Credit Risk Experts","Gianluca Trevisan"],
+   ["Operational Resilience & Oversight","Maria Julve San Martin"],
+   ["Integrated Tools & Remediation","Florian Narring"],
+   ["Supervisory Policy","Florian Weidenholzer"],
+   ["Stress Test Experts","Christoffer Kok","Styliani Riga"]]},
+  {n:"DG On-site & Internal Model Inspections", ko:"현장검사·내부모형국", t:"DG", h:"Karin Turner-Hrdlicka", d:["Muriel Tiesset","Tilo Däbritz"], s:[
+   ["Financial Risk Inspections","Pietro Giammario"],
+   ["Internal Model Investigations","Robert Lauter"],
+   ["Non-Financial Risk Inspections","Marco Rocco"]]},
+  {n:"DG SSM Governance & Operations", ko:"SSM 거버넌스·운영국", t:"DG", h:"Pedro Gustavo Teixeira", d:["Daniela Schackis"], s:[
+   ["Authorisation","Ana Campos"],
+   ["Enforcement & Sanctions","Óscar Meléndez Huelin","Sophie Bening"],
+   ["SSM Secretariat","Marie Cécile Meys"],
+   ["Technology & Innovation","Lukasz Kubicki"],
+   ["Fit and Proper","—"]]},
+  {n:"Directorate Supervisory Strategy & Risk", ko:"감독전략·리스크실", t:"Director", h:"Mario Quagliariello", s:[
+   ["Strategic Risk & Analytics","Klaus Düllmann","Frédéric Lardo"],
+   ["Supervisory Risk – Financial Risk","Thomas Prehofer","Etienne de Bridiers"],
+   ["Supervisory Risk – Non-Financial Risk","Marie Lafontaine","María José Romero Rico"]]}
+ ]}
+];
+
+const BBK_BOARD = [
+ {name:"Prof. Dr. Joachim Nagel", role:"총재 (Präsident) · ECB 정책위원", term:"제1국 (Dezernat I)", units:[
+  {n:"Direktorat Vorstandsangelegenheiten und Internationales", ko:"이사회업무·국제국", t:"Leiter", h:"Marco Leppin", s:[
+   ["Abt. 11 Europa-Sekretariat und BIZ","Weißenseel"],
+   ["Abt. 12 Internationale Währungsordnung, IWF, G7, G20","Dr. Thierfelder"]]},
+  {n:"Zentralbereich K – Kommunikation", ko:"커뮤니케이션 (총재 대변인)", t:"Leiterin", h:"Ingrid Herden", d:["Kreutzer"], s:[
+   ["K 1 Interne Kommunikation und Corporate Design","Dr. Stöß"],
+   ["K 2 Presse- und Öffentlichkeitsarbeit","Peter Trautmann"],
+   ["K 3 Sprachendienst","Belker"],
+   ["K 4 Webangebote und Social Media","Jakobs"]]},
+  {n:"Zentralbereich R – Recht", ko:"법무", t:"Leiter", h:"Dr. Andreas Guericke", d:["Kleine"], s:[
+   ["R 1 Außenwirtschaftsrecht, Compliance, Steuerrecht, Verwaltung","Dr. Eisenhut"],
+   ["R 2 Währungs- und Notenbankrecht, BBankG, int. Organisationen","Dr. Langner"],
+   ["R 3 Geschäftskreis, Eurosystem-Instrumentarium, Finanzmarktrecht","Dr. Keller"],
+   ["Stabsstelle Rechtsfragen Bankenaufsicht/Finanzstabilität","Dr. Steven"],
+   ["Stabsstelle Europa-/Völkerrecht, Digitalisierung/Datenschutz","Schuster"]]},
+  {n:"Zentralbereich SI – Strategie und Innovation", ko:"전략·혁신", t:"Leiterin", h:"Angela Gröne", d:["Dr. Landerer"], s:[
+   ["Strategie und Portfoliosteuerung","Dr. Bucher"],
+   ["Innovation und Digitalisierung","Kissel"]]},
+  {n:"Zentralbereich Vo – Volkswirtschaft", ko:"경제", t:"Leiter", h:"Jens Ulbrich", d:["Dr. Kohns"], s:[
+   ["Vo 1 Geldpolitik und monetäre Analyse","Dr. Worms"],
+   ["Vo 2 Öffentliche Finanzen","Wendorff"],
+   ["Vo 3 Konjunktur und Wachstum","Dr. Manzke"],
+   ["Vo 4 Zahlungsbilanz-, Wechselkurs- und Kapitalmarktanalyse","Dr. Keller"],
+   ["Vo 5 Internationale und europäische Wirtschaft","Dr. Hoffmann"],
+   ["Stabsstelle Querschnittsaufgaben, Reden","Dr. Ried"]]}
+ ]},
+ {name:"Dr. Sabine Mauderer", role:"부총재 (Vizepräsidentin)", term:"제2국 (Dezernat II)", units:[
+  {n:"Generaldirektorat BG – Bargeld", ko:"현금", t:"Leiter", h:"Stefan Hardt", d:["Callen"], s:[
+   ["Programm für die Filialneubauten","Wethmar"],
+   ["BG 1 Rahmenbedingungen Bargeldkreislauf","Dr. Stapf"],
+   ["BG 2 Entwicklung, Beschaffung, Qualitätssicherung","Fischer"],
+   ["BG 3 Operatives Bargeldgeschäft","Rotzler"],
+   ["BG 4 Befähigung der Bargeldprozesse","Elm"]]},
+  {n:"Zentralbereich D€ – Digitaler Euro", ko:"디지털 유로", t:"Leiterin", h:"Dr. Alexandra Hachmeister", d:["Dr. Wandel"], s:[
+   ["Analyse, Policy, Ökosystem","Dr. Winter"],
+   ["Wholesale-CBDC","Strohmeier"],
+   ["Retail-CBDC","Schwarz"]]},
+  {n:"Generaldirektorat ZA – Zahlungsverkehr und Abwicklungssysteme", ko:"지급결제", t:"Leiter", h:"Dr. Julian Reischle", d:["Schrade"], s:[
+   ["ZA 1 Kontodienstleistungen","Pache"],
+   ["ZA 2 Zahlungsdienstleistungen","Lehner-Zeiff"],
+   ["ZA 3 Wertpapierdienstleistungen","Jongebloed"],
+   ["ZA 4 TARGET Services Bundesbank","Dr. Freyberg"],
+   ["ZA 5 TARGET Marktinfrastruktur-Services","Simoens"],
+   ["ZA 6 Policy, Oversight und Analyse","Schmudde"]]}
+ ]},
+ {name:"Dr. Philipp Nimmermann", role:"이사 (2026-11 취임, Burkhard Balz 후임)", term:"제3국 (Dezernat III)", units:[
+  {n:"Zentralbereich DS – Daten und Statistik", ko:"데이터·통계 (CDO)", t:"Leiterin", h:"Gabriele Meinert", d:["Kirchner"], s:[
+   ["DS 1 Dateninfrastrukturen","Kladny"],
+   ["DS 2 Meldewesen Referenz- und Außenwirtschaftsdaten","Jünger"],
+   ["DS 3 Meldewesen Finanzwirtschaftliche Daten","Brunken"],
+   ["DS 4 Statistikerstellung","Dr. Gorenflo"],
+   ["DS 5 Außenwirtschafts- und Finanzsanktionsprüfungen","Timmermann"],
+   ["DS 6 Datenservicezentrum","Bender"]]},
+  {n:"Forschungszentrum", ko:"연구센터", t:"Leiter", h:"Prof. Dr. Falko Fecht"},
+  {n:"Zentralbereich IT – Informationstechnologie", ko:"정보기술", t:"Leiter", h:"Dr. Stefan Markscheffel", d:["Dr. Staab"], s:[
+   ["IT 1 Plattformmanagement Arbeitsplatz","Dr. Hohmann"],
+   ["IT 2 Plattformmanagement Mainframe","Stuckmann"],
+   ["IT 3 Plattformmanagement Drittprodukte","Dr. Wetzka"],
+   ["IT 4 Plattformmanagement Web","Lerch"],
+   ["IT 5 IT-Basisinfrastruktur","Meth"],
+   ["IT 6 IT-Verbundservices","Bald"],
+   ["IT 7 Explorative IT","Kegler"]]},
+  {n:"Risiko-Controlling", ko:"리스크통제", t:"Leiter", h:"Dr. Sung", s:[["Abt. 20 Quantitatives Risikomanagement und Informationssysteme","Binder"]]},
+  {n:"Nachhaltigkeit", ko:"지속가능성", t:"Leitung", h:"N.N. (공석)"}
+ ]},
+ {name:"Lutz Lienenkämper", role:"이사", term:"제4국 (Dezernat IV)", units:[
+  {n:"Zentralbereich P – Personal", ko:"인사", t:"Leiterin", h:"Dr. Sabine Herrmann", d:["Füssel"], s:[
+   ["P 1 Personalmanagement","Schilling"],
+   ["P 2 Interne Personaldienste, Bezüge und Versorgung","Baumann"],
+   ["P 3 HR Digitale Transformation und Strategie","Graf"],
+   ["P 4 Ökonomische Bildung, Employer Branding, Ausbildung","Pohl"],
+   ["P 5 Personalentwicklung","Lösinger"]]},
+  {n:"Compliance", ko:"준법감시 (CCO)", t:"CCO", h:"Ulrich Rilling"},
+  {n:"Zentralbereich Rv – Revision", ko:"내부감사", t:"Leiter", h:"Marcus Hornung", d:["Dr. Bodensohn"], s:[
+   ["Rv 1 Revisionen I","Dr. Döhler"],
+   ["Rv 2 Revisionen II","Dr. Bodensohn"],
+   ["Rv 3 Grundsatz und Revisionen III","Hug"]]}
+ ]},
+ {name:"Michael Theurer", role:"이사", term:"제5국 (Dezernat V)", units:[
+  {n:"Generaldirektorat FA – Finanzaufsicht", ko:"금융감독", t:"Leiter", h:"Karlheinz Walch", d:["Schulz"], s:[
+   ["FA 1 Strategie, Steuerung und Kommunikation",""],["FA 2 Mikroprudenzielle Regulierung",""],["FA 3 Laufende Aufsicht National",""],
+   ["FA 4 Aufsichtliche Prüfungen",""],["FA 5 Laufende Aufsicht SI",""],["FA 6 Innovation und Evaluation",""],
+   ["FA 7 Aufsichtliche Daten und Risikoanalysen",""],["FA 8 Digitale Transformation der Aufsicht",""],
+   ["Bereichsleitungen (배치 불명확)","von Heimburg, Dr. Sattler, Dr. Albrecht, Stindt, Volk, Dr. Ahlfeld, Dr. Blochwitz, Dr. Drescher"]]},
+  {n:"Generaldirektorat FS – Finanzstabilität", ko:"금융안정", t:"Leiter", h:"Dr. Joerg Stephan", d:["Dr. Hubrich"], s:[
+   ["Führungsverbund","Breuer / Korbmacher / Dr. Prieto Fernandez"]]}
+ ]},
+ {name:"Prof. Dr. Fritzi Köhler-Geib", role:"이사", term:"제6국 (Dezernat VI)", units:[
+  {n:"Zentralbereich C – Controlling, Rechnungswesen, Organisation", ko:"재무통제·회계·조직", t:"Leiter", h:"Dr. Alexander Lipponer", d:["Taube"], s:[
+   ["C 1 Finanzielles Controlling","Dr. Möhlen"],
+   ["C 2 Rechnungswesen","Uekermann"],
+   ["C 3 Organisation","Evdjic / Dr. von Meurers"],
+   ["C 4 Prozess- und Contentmanagement","Waltz"]]},
+  {n:"Zentralbereich M – Märkte", ko:"시장 (통화정책 운영·외환·자산운용)", t:"Leiter", h:"Dr. Karsten Stroborn", d:["M. Wieland"], s:[
+   ["M 1 Grundsatzfragen geldpolitische Implementierung","Resinek"],
+   ["M 2 Market Intelligence und Marktanalyse","Dr. Geiger"],
+   ["M 3 Operative Geld- und Währungspolitik","Werner"],
+   ["M 4 Eigenanlagen, Fremdmandate, Finanzmarktservices","Alander"],
+   ["M 5 Marktoperative System- und Projektsteuerung","Hebendanz"]]}
+ ]},
+ {name:"Dr. Stephan Bredt", role:"COO (이사회 전체에 보고)", term:"2024-01-15 신설", units:[
+  {n:"Zentralbereich Ve – Verwaltung", ko:"총무", t:"Leiter", h:"Hans-Joachim Kohse", d:["Röckelein-Wolf"], s:[
+   ["Ve 1 Infrastruktur","Behringer"],
+   ["Ve 2 Zentrale Dienste, Umwelt und operative Sicherheit","Röckelein-Wolf"]]},
+  {n:"Zentralbereich Bm – Baumanagement", ko:"건물관리", t:"Leiterin", h:"Corina Paetsch", s:[
+   ["Bm 1 Baumanagement Nord, Süd, Rhein-Main","Sauer"],
+   ["Bm 2 Baumanagement Campus","Möllenbrok"]]},
+  {n:"Zentralbereich Be – Beschaffungen", ko:"조달", t:"Leiter", h:"Dr. Thomas Ollinger", d:["Dr. Rau"], s:[
+   ["Be 1 Nationale Beschaffungen I","Kaufmann"],
+   ["Be 2 Nationale Beschaffungen II","Dr. Rau"],
+   ["Stabsstelle internationale Beschaffungen; Qualitätsmanagement","Spurtzem"]]}
+ ]}
+];
+
+const HV = [
+ ["Baden-Württemberg","Kathrin Schulte-Südhoff","2026-07~","Marstallstraße 3, 70173 Stuttgart","Postfach 10 60 21, 70049 Stuttgart"],
+ ["Bayern","Reinhold Vollbracht","2022-08~","Leopoldstraße 234, 80807 München","—"],
+ ["Berlin und Brandenburg","Claus Tigges","2010-01~","Leibnizstraße 10, 10625 Berlin","Postfach 12 01 63, 10591 Berlin"],
+ ["Bremen, Niedersachsen und Sachsen-Anhalt","Andreas Retzlaff","2025-01~","Georgsplatz 5, 30159 Hannover","Postfach 245, 30002 Hannover"],
+ ["Hamburg, Mecklenburg-Vorpommern und Schleswig-Holstein","Uwe Nebgen","2024-11~","Willy-Brandt-Straße 73, 20459 Hamburg","Postfach 57 03 48, 22772 Hamburg"],
+ ["Hessen","Dr. Ulf Slopek","2024-09~","Taunusanlage 5, 60329 Frankfurt am Main","Postfach 11 12 32, 60047 Frankfurt am Main"],
+ ["Nordrhein-Westfalen","Christian Otto","2024-01~","Berliner Allee 14, 40212 Düsseldorf","Postfach 10 11 48, 40002 Düsseldorf"],
+ ["Rheinland-Pfalz und Saarland","Bernd Kaltenhäuser","2014-10~ (2025-11~2026-08 IMF 이사로 휴직)","Hegelstraße 65, 55122 Mainz","Postfach 30 09, 55020 Mainz"],
+ ["Sachsen und Thüringen","Guido Müller","2024-08~","Straße des 18. Oktober 48, 04103 Leipzig","Postfach 90 11 21, 04358 Leipzig"]
+];
+
+const GENERAL = [
+ {t:"ECB 대표", rows:[["주소","Sonnemannstrasse 20, 60314 Frankfurt am Main"],["우편","European Central Bank, 60640 Frankfurt am Main"],["택배","Sonnemannstrasse 22, 60314 Frankfurt am Main"],["대표전화","+49 69 1344 0"],["일반문의","+49 69 1344 1300 (평일 10–12, 14–16시)"],["무료전화","+800 88 01 16 11"],["문의양식","form.ecb.europa.eu/services/rest/publicinformationrequest"]]},
+ {t:"ECB 언론·기타", rows:[["언론","media@ecb.europa.eu"],["언론전화","+49 69 1344 7455 (주말·공휴일 당직 연결)"],["웹사이트","webmaster@ecb.europa.eu"],["채용","join-us@ecb.europa.eu"],["브뤼셀 사무소","brussels-office@ecb.europa.eu"],["브뤼셀 주소","Rue de la Science 37, 1040 Bruxelles"]]},
+ {t:"Bundesbank 대표", rows:[["주소","Wilhelm-Epstein-Straße 14, 60431 Frankfurt am Main"],["우편","Postfach 10 06 02, 60006 Frankfurt am Main"],["대표전화","069 9566-0"],["이메일","info@bundesbank.de"],["언론","presse@bundesbank.de"],["공보·홍보 전화","069 9566-33512 (평일 8–16시)"]]}
+];
+
+const ECB_PRESS = [
+ ["Wolfgang Proissl","Director General Communications","wolfgang.proissl@ecb.europa.eu","+49 69 1344 8172",""],
+ ["Conny Lotze","Deputy DG Communications","conny.lotze@ecb.europa.eu","+49 69 1344 7651",""],
+ ["Paul Gordon","Head of Newsroom Division","paul.gordon@ecb.europa.eu","+49 69 1344 23476","+49 172 253 5723"],
+ ["Uta Harnischfeger","Deputy Head of Newsroom","uta.harnischfeger@ecb.europa.eu","+49 69 1344 6321","+49 162 132 6358"],
+ ["Alessandro Speciale","Press Officer","alessandro.speciale@ecb.europa.eu","+49 69 1344 17509","+49 172 167 0791"],
+ ["Alexandrine Bouilhet","Press Officer (Brussels)","alexandrine.bouilhet@ecb.europa.eu","","+49 172 174 9366"],
+ ["Andrea Zizola","Press Officer (감독 겸)","andrea.zizola@ecb.europa.eu","+49 69 1344 6551","+49 170 229 2502"],
+ ["Benoit Deeg","Press Officer","benoit.deeg@ecb.europa.eu","+49 69 1344 95686","+49 172 168 3704"],
+ ["Camille Lafarque","Press Officer (감독)","camille.lafarque@ecb.europa.eu","+49 69 1344 4861","+49 151 7442 4926"],
+ ["Carlijn Straathof","Press Officer (Brussels, 감독 겸)","carlijn.straathof@ecb.europa.eu","+49 69 1344 23419","+49 170 348 7585"],
+ ["Clara Martín Marqués","Press Officer (감독 겸)","clara.martin_marques@ecb.europa.eu","+49 69 1344 17919","+49 173 379 0591"],
+ ["Daniel Weber","Press Officer","daniel.weber1@ecb.europa.eu","+49 69 1344 17158","+49 172 834 4539"],
+ ["Esther Tejedor","Press Officer (감독 겸)","esther.tejedor@ecb.europa.eu","+49 69 1344 95596","+49 172 517 1280"],
+ ["Eszter Miltényi-Torstensson","Press Officer","eszter.miltenyi-torstensson@ecb.europa.eu","+49 69 1344 8034","+49 171 769 5305"],
+ ["François Peyratout","Press Officer","francois.peyratout@ecb.europa.eu","+49 69 1344 8948","+49 172 863 2119"],
+ ["Georgina Garriga Sánchez","Press Officer","georgina.garriga_sanchez@ecb.europa.eu","+49 69 1344 95368","+49 152 2255 2184"],
+ ["Josephine Nachtsheim","Press Officer","josephine.nachtsheim@ecb.europa.eu","+49 69 1344 1442","+49 170 662 0455"],
+ ["Lena-Sophie Demuth","Press Officer","lena-sophie.demuth@ecb.europa.eu","+49 69 1344 5423","+49 162 295 2316"],
+ ["Lise Handal","Press Officer (감독 겸)","lise.handal@ecb.europa.eu","+49 69 1344 17441","+49 171 177 5875"],
+ ["Mila Quacquarelli","Press Officer","mila.quacquarelli@ecb.europa.eu","+49 69 1344 17472","+49 170 632 4603"],
+ ["Philippe Rispal","Press Officer","philippe.rispal@ecb.europa.eu","+49 69 1344 5482","+49 175 182 6376"],
+ ["Tim Breutner","Press Officer (감독)","tim.breutner@ecb.europa.eu","+49 69 1344 4463","+49 162 213 2908"],
+ ["William Lelieveldt","Press Officer","william.lelieveldt@ecb.europa.eu","+49 69 1344 7316","+49 170 227 9090"]
+];
+
+const BBK_PRESS = [
+ ["Ingrid Herden","Zentralbereichsleiterin Kommunikation, 총재 대변인","presse@bundesbank.de","069 9566-32909",""],
+ ["Peter Trautmann","Abteilungsleiter Presse- und Öffentlichkeitsarbeit","presse@bundesbank.de","069 9566-32489",""],
+ ["Dorit Feldbrügge","Leiterin Presse- und Medienkommunikation","presse@bundesbank.de","069 9566-37096","0172 2819628"],
+ ["Moritz August Raasch","Pressereferent","presse@bundesbank.de","069 9566-33864","0172 6193151"],
+ ["Annette Grüttner","Pressereferentin","presse@bundesbank.de","069 9566-37460","0162 4492511"],
+ ["Felix Kretz","Pressereferent","presse@bundesbank.de","069 9566-35737","0171 6529407"],
+ ["Susanne Mehlhorn","Pressereferentin","presse@bundesbank.de","069 9566-38063","0174 3453486"],
+ ["Anna Steiner","Pressereferentin","presse@bundesbank.de","069 9566-34327","0151 70597040"]
+];
+
+const BOK_EU = [
+ {t:"한국은행 프랑크푸르트사무소", hl:true, rows:[["책임자","강태수 사무소장 (사무소 통할)"],["주소","Messeturm 29. OG, Friedrich-Ebert-Anlage 49, 60308 Frankfurt am Main"],["전화","+49 69 7434 870"],["팩스","+49 69 7434 8729"],["이메일","bokffm@bok.or.kr"]]},
+ {t:"한국은행 런던사무소", rows:[["책임자","서평석 사무소장 (사무소 통할)"],["주소","8th Floor, Tower 42, 25 Old Broad Street, London EC2N 1HQ"],["전화","+44 20 7382 0580"],["팩스","+44 20 7256 7668"],["이메일","boklondon@bok.or.kr"]]}
+];
+const BOK_OTHER = [
+ ["뉴욕사무소","전광명 사무소장","780 Third Avenue (21st floor), New York, N.Y. 10017","+1 212 759 5121","bokny@bok.or.kr"],
+ ["워싱턴주재원","신진호","1825 K Street, N.W., Suite 900, Washington D.C. 20006","+1 202 463 7152","bokdc@bok.or.kr"],
+ ["동경사무소","김봉기 사무소장","Rm. 837 Shin Kokusai Bldg., 3-4-1 Marunouchi, Chiyoda-ku, Tokyo 100-0005","+81 3 3213 6961","tokyo@bok.or.kr"],
+ ["북경사무소","이재화 사무소장","3509C, China World Trade Center Tower 2, No. 1 Jianguomenwai Avenue, Beijing 100004","+86 10 6505 9877","beijing@bok.or.kr"],
+ ["홍콩주재원","정삼선","Room 3404, Gloucester Tower, The Landmark, 15 Queen's Road Central, Hong Kong","+852 2526 6508","bokhk@bok.or.kr"],
+ ["상해주재원","김철","3505, Shanghai IFC Tower 2, No. 8 Century Avenue, Pudong, Shanghai 200120","+86 21 5031 7126",""]
+];
+// [기관, 부서, 책임자, 관련, 연락경로]
+const BOK_CP = [
+ ["Bundesbank","Repräsentanz Tokio (도쿄 대표부)","Dr. Eugen Cleveland","일본·한국·호주 담당. Bank of Japan, 한국은행, RBA와의 업무 대화가 공식 소관","Bundesbank 문의 양식 (대표부 페이지 경유)"],
+ ["Bundesbank","Direktorat Vorstandsangelegenheiten und Internationales","Marco Leppin","총재(Nagel) 직속 국제업무 총괄. 해외 중앙은행 고위급 교류 창구","대표 069 9566-0"],
+ ["Bundesbank","Abt. 12 Internationale Währungsordnung, IWF, G7, G20","Dr. Thierfelder","IMF·G20 등 한국은행과 함께 참여하는 국제회의 실무","대표 069 9566-0"],
+ ["Bundesbank","Abt. 11 Europa-Sekretariat und BIZ","Weißenseel","BIS(국제결제은행) 관련 업무","대표 069 9566-0"],
+ ["Bundesbank","ZiZ – Zentrum für internationalen Zentralbankdialog","Dinkelborg","해외 중앙은행 대상 연수·기술협력 세미나","Bundesbank 문의 양식"],
+ ["Bundesbank","Zentralbereich Vo – Abt. Vo 5 Internationale und europäische Wirtschaft","Dr. Hoffmann","아시아 포함 국제경제 분석","대표 069 9566-0"],
+ ["ECB","DG International & European Relations","Christophe Kamps (DG), Fátima Pires (부)","EU 밖 중앙은행과의 관계 총괄 (담당 집행이사 Piero Cipollone)","대표 +49 69 1344 0"],
+ ["ECB","International Policy Analysis Division","Stelios Makrydakis (부: Ine Hilde Van Robays)","G20·IMF·FSB 등 국제 정책 공조","대표 +49 69 1344 0"],
+ ["ECB","External Developments Division","Matthieu Darracq Pariès (부: Maria Grazia Attinasi)","아시아 등 역외 경제 동향 분석","대표 +49 69 1344 0"],
+ ["ECB","DG Market Operations","Imène Rahmouni-Rousseau","외환보유액 운용, 중앙은행 간 통화스와프 등 시장운영","대표 +49 69 1344 0"],
+ ["ECB","Communications – Newsroom Division","Paul Gordon","공식 발표·언론 문의","media@ecb.europa.eu · +49 69 1344 7455"]
+];
+// [기관, 부서, 책임자, 역할]
+const BOK_SUP = [
+ ["ECB","DG Specialised Institutions & LSIs","Thomas Broeng Jorgensen","독일 내 한국계 은행 법인(KEB Hana Bank (D), Shinhan Bank Europe, Woori Bank Europe, Hyundai Capital Bank Europe)처럼 덜 중요한 은행(LSI)에 대한 ECB의 간접 감독"],
+ ["ECB","Institutional & Sectoral Oversight Division","Anne Fröhling","LSI 감독 총괄 (각국 감독당국 감독 활동의 점검)"],
+ ["ECB","SSM Governance & Operations – Authorisation","Ana Campos","은행 인가, 지분 취득 승인 (LSI 포함)"],
+ ["Bundesbank","Generaldirektorat FA – Finanzaufsicht","Karlheinz Walch","은행감독 총괄 (BaFin과 공동 감독). FA 3 Laufende Aufsicht National이 국내 LSI 상시감독 담당"],
+ ["Bundesbank","Hauptverwaltung in Hessen","Dr. Ulf Slopek (본부장)","프랑크푸르트 소재 은행·외국은행 지점의 지역 상시감독 (Regionalbereich Banken und Finanzaufsicht)"],
+ ["Bundesbank","Zentralbereich DS – Abt. DS 5 Außenwirtschafts- und Finanzsanktionsprüfungen","Timmermann","외환·국제수지 보고, 금융제재 점검"]
+];
+
+const SOURCES = [
+ ["한국은행 조직도 – 국외사무소","https://www.bok.or.kr/portal/main/contents.do?menuNo=201697"],
+ ["Bundesbank Repräsentanzen und Repräsentanten","https://www.bundesbank.de/de/bundesbank/internationaler-zentralbankdialog/repraesentanzen/repraesentanzen-und-repraesentanten-742826"],
+ ["ECB List of managers (2026-10-01)","https://www.ecb.europa.eu/ecb/pdf/orga/ecb.ECB_managers.en.pdf"],
+ ["ECB Executive Board 업무분장 (2026-06)","https://www.ecb.europa.eu/ecb/pdf/orga/ecb.EB_responsibilities.en.pdf"],
+ ["ECB 조직도 페이지","https://www.ecb.europa.eu/ecb/orga/orgachart/html/index.en.html"],
+ ["ECB 언론 연락처","https://www.ecb.europa.eu/press/contacts/html/index.en.html"],
+ ["ECB 은행감독 언론 연락처","https://www.bankingsupervision.europa.eu/press/contacts/html/index.en.html"],
+ ["ECB 감독이사회","https://www.bankingsupervision.europa.eu/organisation/whoiswho/supervisoryboard/html/index.en.html"],
+ ["ECB 연락처·주소","https://www.ecb.europa.eu/home/contacts/html/index.en.html"],
+ ["Bundesbank Vorstand","https://www.bundesbank.de/de/bundesbank/organisation/vorstand"],
+ ["Bundesbank Organisationsplan der Zentrale (2026-08-01)","https://www.bundesbank.de/resource/blob/604160/695bf2dd308c623a91eb61f14289463e/472B63F073F071307366337C94F8C870/organisationsplan-der-zentrale-data.pdf"],
+ ["Bundesbank COO und Bereiche","https://www.bundesbank.de/de/bundesbank/organisation/coo-und-bereiche"],
+ ["Bundesbank Pressekontakt","https://www.bundesbank.de/de/presse/pressekontakt"],
+ ["Bundesbank Hauptverwaltungen","https://www.bundesbank.de/de/bundesbank/organisation"]
+];
+
+// ---------- RENDER ----------
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function unitHTML(u){
+  const deps = u.d && u.d.length ? `<span class="deps">부(Deputy): ${u.d.map(esc).join(", ")}</span>` : "";
+  const subs = (u.s||[]).map(([n,h,dep]) =>
+    `<tr><td>${esc(n)}</td><td>${esc(h||"—")}${dep?`<span class="dep">부: ${esc(dep)}</span>`:""}</td></tr>`).join("");
+  const body = (subs || u.note) ? `<div class="ubody">${u.note?`<div class="note">${esc(u.note)}</div>`:""}${subs?`<table class="subs"><tbody>${subs}</tbody></table>`:""}</div>` : "";
+  return `<details class="unit"${body?"":" data-leaf"}>
+    <summary><span class="uname">${esc(u.n)}${u.ko?`<br><span class="uko">${esc(u.ko)}</span>`:""}</span>${body?`<span class="chev" aria-hidden="true">▶</span>`:"<span></span>"}
+    <span class="uhead"><span class="tag">${esc(u.t)}</span><b>${esc(u.h)}</b></span>${deps}</summary>${body}</details>`;
+}
+function boardHTML(list){
+  return list.map(m => `<article class="member"><div class="mh"><span class="name">${esc(m.name)}</span><span class="role">${esc(m.role)}</span>${m.term?`<span class="term">${esc(m.term)}</span>`:""}</div><div class="units">${m.units.map(unitHTML).join("")}</div></article>`).join("");
+}
+function copyBtn(v){ return v ? `<button class="copy" type="button" data-copy="${esc(v)}" aria-label="${esc(v)} 복사">복사</button>` : ""; }
+function pressRows(rows){
+  return rows.map(([n,r,e,p,m]) => `<tr><td><b>${esc(n)}</b></td><td>${esc(r)}</td><td class="mono">${esc(e)}${copyBtn(e)}</td><td class="mono">${esc(p||"—")}${copyBtn(p)}</td><td class="mono">${esc(m||"—")}${copyBtn(m)}</td></tr>`).join("");
+}
+
+document.getElementById("ecb-board").innerHTML = boardHTML(ECB_BOARD);
+document.getElementById("ecb-ssm").innerHTML = boardHTML(ECB_SSM);
+document.getElementById("ssm-board").textContent = ECB_SSM_BOARD;
+document.getElementById("bbk-board").innerHTML = boardHTML(BBK_BOARD);
+document.querySelector("#hv tbody").innerHTML = HV.map(r => `<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td class="mono">${esc(r[2])}</td><td>${esc(r[3])}</td><td>${esc(r[4])}</td></tr>`).join("");
+const boxHTML = g => `<div class="box${g.hl?" hl":""}"><h4>${esc(g.t)}</h4><dl>${g.rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}${/@|^[+0]\d/.test(v)?copyBtn(v.replace(/\s*\(.*\)$/,"")):""}</dd>`).join("")}</dl></div>`;
+document.getElementById("bok-eu").innerHTML = BOK_EU.map(boxHTML).join("");
+document.querySelector("#bok-other tbody").innerHTML = BOK_OTHER.map(([o,h,a,p,e]) => `<tr><td><b>${esc(o)}</b></td><td>${esc(h)}</td><td>${esc(a)}</td><td class="mono">${esc(p)}${copyBtn(p)}</td><td class="mono">${esc(e||"—")}${copyBtn(e)}</td></tr>`).join("");
+document.querySelector("#bok-cp tbody").innerHTML = BOK_CP.map(([i,d,h,r,c]) => `<tr><td>${esc(i)}</td><td><b>${esc(d)}</b></td><td>${esc(h)}</td><td>${esc(r)}</td><td>${esc(c)}</td></tr>`).join("");
+document.querySelector("#bok-sup tbody").innerHTML = BOK_SUP.map(([i,d,h,r]) => `<tr><td>${esc(i)}</td><td><b>${esc(d)}</b></td><td>${esc(h)}</td><td>${esc(r)}</td></tr>`).join("");
+document.getElementById("general").innerHTML = GENERAL.map(g => `<div class="box"><h4>${esc(g.t)}</h4><dl>${g.rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}${/@|^[+0]\d/.test(v)?copyBtn(v.replace(/\s*\(.*\)$/,"")):""}</dd>`).join("")}</dl></div>`).join("");
+document.querySelector("#ecb-press tbody").innerHTML = pressRows(ECB_PRESS);
+document.querySelector("#bbk-press tbody").innerHTML = pressRows(BBK_PRESS);
+document.getElementById("sources").innerHTML = "<b>출처</b>" + SOURCES.map(([t,u]) => `<span>${esc(t)} — <a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https:\/\//,"").slice(0,80))}${u.length>88?"…":""}</a></span>`).join("");
+
+// label every table cell with its column header so phones can show rows as cards
+document.querySelectorAll("table.ct").forEach(t => {
+  const heads = [...t.querySelectorAll("thead th")].map(th => th.textContent.trim());
+  t.querySelectorAll("tbody tr").forEach(tr => [...tr.children].forEach((td, i) => {
+    td.dataset.label = heads[i] || "";
+    if (/^[—\s]*$/.test(td.textContent.replace("복사",""))) td.dataset.empty = "";
+  }));
+});
+
+// copy
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-copy]"); if(!b) return;
+  const v = b.dataset.copy;
+  const done = () => { b.textContent = "복사됨"; setTimeout(()=>b.textContent="복사",1200); };
+  try { navigator.clipboard.writeText(v).then(done, () => selectText(b)); } catch(_) { selectText(b); }
+});
+function selectText(b){ const r=document.createRange(); r.selectNodeContents(b.parentNode); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+// ---------- ROUTING ----------
+const views = [...document.querySelectorAll("section[data-view]")];
+function show(){
+  const q = document.getElementById("q").value.trim();
+  const id = (location.hash||"#ecb").slice(1);
+  const cur = ["ecb","bbk","bok","contacts"].includes(id) ? id : "ecb";
+  views.forEach(v => v.hidden = q ? false : v.dataset.view !== cur);
+  document.querySelectorAll("[data-nav]").forEach(a => { if(!q && a.dataset.nav===cur) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+}
+window.addEventListener("hashchange", () => { document.getElementById("q").value=""; runSearch(); window.scrollTo(0, 0); });
+
+// ---------- SEARCH ----------
+const norm = s => s.normalize("NFD").replace(/\p{M}/gu,"").toLowerCase();
+function clearMarks(root){ root.querySelectorAll("mark").forEach(m => m.replaceWith(document.createTextNode(m.textContent))); root.normalize(); }
+function markIn(el, q){
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(n => {
+    const t=n.nodeValue, i=norm(t).indexOf(q); if(i<0||n.parentNode.closest("button")) return;
+    const r=document.createRange(); r.setStart(n,i); r.setEnd(n,i+q.length); const m=document.createElement("mark"); r.surroundContents(m);
+  });
+}
+function runSearch(){
+  const raw = document.getElementById("q").value.trim(), q = norm(raw);
+  const main = document.querySelector("main");
+  clearMarks(main);
+  main.querySelectorAll(".hidden-by-search").forEach(e => e.classList.remove("hidden-by-search"));
+  let hits = 0;
+  if(q){
+    main.querySelectorAll("article.member").forEach(m => {
+      const memberHit = norm(m.querySelector(".mh").textContent).includes(q);
+      let any = false;
+      m.querySelectorAll("details.unit").forEach(d => {
+        const hit = norm(d.textContent).includes(q);
+        d.classList.toggle("hidden-by-search", !(hit||memberHit));
+        if(hit){ any = true; hits++; d.open = !d.hasAttribute("data-leaf") && norm(d.querySelector(".ubody")?.textContent||"").includes(q); d.querySelectorAll("tr").forEach(tr => tr.classList.toggle("hidden-by-search", !norm(tr.textContent).includes(q) && !norm(d.querySelector("summary").textContent).includes(q))); }
+      });
+      if(memberHit) hits++;
+      m.classList.toggle("hidden-by-search", !(any||memberHit));
+    });
+    main.querySelectorAll("table.ct tbody tr").forEach(tr => { const h = norm(tr.textContent).includes(q); tr.classList.toggle("hidden-by-search", !h); if(h) hits++; });
+    main.querySelectorAll(".tbl-wrap").forEach(w => w.classList.toggle("hidden-by-search", !w.querySelector("tbody tr:not(.hidden-by-search)")));
+    main.querySelectorAll(".box").forEach(b => { const h = norm(b.textContent).includes(q); b.classList.toggle("hidden-by-search", !h); if(h) hits++; });
+    main.querySelectorAll("h3.band, .callout, .sources").forEach(e => e.classList.add("hidden-by-search"));
+    views.forEach(v => v.classList.toggle("hidden-by-search", !v.querySelector("article.member:not(.hidden-by-search), table.ct tbody tr:not(.hidden-by-search), .box:not(.hidden-by-search)")));
+    markIn(main, q);
+  } else {
+    main.querySelectorAll("details.unit").forEach(d => d.open = false);
+  }
+  document.getElementById("count").textContent = q ? `${hits}건` : "";
+  show();
+}
+let tm; document.getElementById("q").addEventListener("input", () => { clearTimeout(tm); tm = setTimeout(runSearch, 120); });
+show();
+</script>
