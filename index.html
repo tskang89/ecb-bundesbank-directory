@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ECB · Bundesbank · BaFin · KfW 조직 디렉터리</title>
+<title>ECB · Bundesbank 조직 디렉터리</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
@@ -8,17 +8,17 @@
 /* Layout: sticky header with institution tabs + search; board members as columns of collapsible unit cards; contacts as tables */
 :root{
   --bg:#f5f6f8; --surface:#ffffff; --ink:#16202c; --muted:#5b6675; --line:#dde2e9;
-  --ecb:#1f3f8f; --ecb-soft:#e7ecf8; --bbk:#0f6b62; --bbk-soft:#e2f1ee; --baf:#7a2e86; --baf-soft:#f3e8f5; --kfw:#9a3f0c; --kfw-soft:#fbeadf; --warn:#8a5a00; --warn-soft:#fbf1dc;
+  --ecb:#1f3f8f; --ecb-soft:#e7ecf8; --bbk:#0f6b62; --bbk-soft:#e2f1ee; --warn:#8a5a00; --warn-soft:#fbf1dc;
   --mark:#ffe58a;
   --f-sans:"IBM Plex Sans","IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#10151c; --surface:#18202a; --ink:#e6ebf1; --muted:#9aa6b4; --line:#2a3542;
-  --ecb:#8fa9ec; --ecb-soft:#1d2a47; --bbk:#6cc9bb; --bbk-soft:#14322e; --baf:#d6a2e0; --baf-soft:#33203a; --kfw:#f0a272; --kfw-soft:#3a2416; --warn:#e7b960; --warn-soft:#3a2d12; --mark:#6b5a12; color-scheme:dark}}
+  --ecb:#8fa9ec; --ecb-soft:#1d2a47; --bbk:#6cc9bb; --bbk-soft:#14322e; --warn:#e7b960; --warn-soft:#3a2d12; --mark:#6b5a12; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#10151c; --surface:#18202a; --ink:#e6ebf1; --muted:#9aa6b4; --line:#2a3542;
-  --ecb:#8fa9ec; --ecb-soft:#1d2a47; --bbk:#6cc9bb; --bbk-soft:#14322e; --baf:#d6a2e0; --baf-soft:#33203a; --kfw:#f0a272; --kfw-soft:#3a2416; --warn:#e7b960; --warn-soft:#3a2d12; --mark:#6b5a12; color-scheme:dark}
+  --ecb:#8fa9ec; --ecb-soft:#1d2a47; --bbk:#6cc9bb; --bbk-soft:#14322e; --warn:#e7b960; --warn-soft:#3a2d12; --mark:#6b5a12; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:14px;line-height:1.55}
@@ -48,8 +48,6 @@ h3.band::after{content:"";flex:1;height:1px;background:var(--line)}
 .member>.mh{padding:14px 16px 12px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
 .ecb .member>.mh{border-top:3px solid var(--ecb);border-radius:8px 8px 0 0}
 .bbk .member>.mh{border-top:3px solid var(--bbk);border-radius:8px 8px 0 0}
-.baf .member>.mh{border-top:3px solid var(--baf);border-radius:8px 8px 0 0}
-.kfw .member>.mh{border-top:3px solid var(--kfw);border-radius:8px 8px 0 0}
 .mh .name{font-size:16px;font-weight:700}
 .mh .role{font-size:12.5px;color:var(--muted)}
 .mh .term{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
@@ -68,14 +66,11 @@ details[open]>summary .chev{transform:rotate(90deg)}
 .tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.04em;padding:1px 6px;border-radius:4px;margin-right:6px;vertical-align:1px}
 .ecb .tag{background:var(--ecb-soft);color:var(--ecb)}
 .bbk .tag{background:var(--bbk-soft);color:var(--bbk)}
-.baf .tag{background:var(--baf-soft);color:var(--baf)}
-.kfw .tag{background:var(--kfw-soft);color:var(--kfw)}
 .deps{grid-column:1/-1;font-size:12.5px;color:var(--muted)}
 .ubody{padding:0 16px 12px;display:flex;flex-direction:column;gap:6px}
 .subs{width:100%;border-collapse:collapse;font-size:12.5px}
 .subs td{padding:5px 0;border-top:1px dashed var(--line);vertical-align:top}
 .subs td:first-child{padding-right:10px;color:var(--muted);width:55%}
-.subs td[colspan]{width:auto}
 .subs td:last-child{font-weight:500}
 .subs .dep{display:block;font-weight:400;color:var(--muted);font-size:12px}
 .note{font-size:12px;color:var(--warn);background:var(--warn-soft);padding:6px 8px;border-radius:5px}
@@ -113,7 +108,7 @@ footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-to
   .mtitle small{display:block;font-size:12px;font-weight:400;color:var(--muted)}
   header h1{display:none}
   header .wrap{padding-block:8px;gap:8px}
-  nav{display:grid;grid-template-columns:repeat(3,1fr);width:100%;gap:4px}
+  nav{display:grid;grid-template-columns:repeat(4,1fr);width:100%;gap:4px}
   nav a{text-align:center;padding:9px 4px;font-size:13.5px}
   .search{flex-basis:100%}
   .search input{font-size:16px;padding:9px 12px}
@@ -141,15 +136,13 @@ footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-to
 @media (prefers-reduced-motion:reduce){.chev{transition:none}}
 </style>
 
-<div class="mtitle wrap" aria-hidden="true">ECB · Bundesbank · BaFin · KfW 조직 디렉터리<small>조직 구조, 담당자, 공개 연락처</small></div>
+<div class="mtitle wrap" aria-hidden="true">ECB · Bundesbank 조직 디렉터리<small>조직 구조, 담당자, 공개 연락처</small></div>
 <header>
   <div class="wrap">
-    <h1>ECB · Bundesbank · BaFin · KfW 조직 디렉터리<small>조직 구조, 담당자, 공개 연락처</small></h1>
+    <h1>ECB · Bundesbank 조직 디렉터리<small>조직 구조, 담당자, 공개 연락처</small></h1>
     <nav aria-label="기관">
       <a href="#ecb" data-nav="ecb">ECB</a>
       <a href="#bbk" data-nav="bbk">Bundesbank</a>
-      <a href="#baf" data-nav="baf">BaFin</a>
-      <a href="#kfw" data-nav="kfw">KfW</a>
       <a href="#bok" data-nav="bok">한국은행</a>
       <a href="#contacts" data-nav="contacts">연락처</a>
     </nav>
@@ -186,32 +179,6 @@ footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-to
   <div class="tbl-wrap"><table class="ct" id="hv"><thead><tr><th>지역본부</th><th>본부장</th><th>재임</th><th>주소</th><th>우편</th></tr></thead><tbody></tbody></table></div>
 </section>
 
-<section data-view="baf" class="baf">
-  <div class="intro">
-    <h2>Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin)</h2>
-    <span class="asof">Direktorium 2026-11 기준 · 조직도(Organisationsplan) 2026-11-04 기준</span>
-  </div>
-  <div class="callout"><span><b>부서장 미공개</b> BaFin 조직도에는 원장·부원장(Exekutivdirektor) 아래 부서장 이름이 실려 있지 않아 부서명만 적었습니다. 부서 문의는 대표번호(0228 4108-0)나 분야별 대변인을 거칩니다.</span><span><b>2026-07 개편</b> 정리(Abwicklung) 부문이 Rodolphe 부원장 소관에서 전략·정책·안정(SPS) 부문으로 옮겨졌고, 남은 자금세탁방지 부문은 Anti-Financial Crime으로 이름이 바뀌었습니다.</span></div>
-  <h3 class="band">원장·부원장 (Direktorium) · 담당 부서</h3>
-  <div class="board" id="baf-board"></div>
-  <h3 class="band">한국계 은행·지점 감독 관련 부서</h3>
-  <div class="tbl-wrap"><table class="ct" id="baf-kr"><thead><tr><th>부서</th><th>소속</th><th>소관</th></tr></thead><tbody></tbody></table></div>
-</section>
-
-<section data-view="kfw" class="kfw">
-  <div class="intro">
-    <h2>KfW Bankengruppe</h2>
-    <span class="asof">이사회 2026-11 기준 (kfw.de, 보도자료)</span>
-  </div>
-  <div class="callout"><span><b>이사 교체</b> Christiane Laibach(국제금융협력) 후임으로 Brigitte Réthier가 2026-07-15 취임했고, Dr. Susanne Maurenbrecher가 2026-10-01 IT·운영 담당 이사(CIO/COO)로 합류했습니다. 2026-05부터 컴플라이언스는 Dr. Karsten Hardraht(법무 총괄)가 겸임합니다.</span><span><b>부서장 미공개</b> KfW는 조직도를 공개하지 않습니다. 이사별 담당 부문과 자회사 경영진만 적었습니다.</span></div>
-  <h3 class="band">이사회 (Vorstand) · 담당 부문</h3>
-  <div class="board" id="kfw-board"></div>
-  <h3 class="band">자회사 경영진</h3>
-  <div class="board" id="kfw-subs"></div>
-  <h3 class="band">한국·아시아 관련 창구</h3>
-  <div class="tbl-wrap"><table class="ct" id="kfw-kr"><thead><tr><th>부서</th><th>책임자</th><th>소관</th><th>연락 경로</th></tr></thead><tbody></tbody></table></div>
-</section>
-
 <section data-view="bok" class="bok">
   <div class="intro">
     <h2>한국은행 관련 담당자</h2>
@@ -239,15 +206,11 @@ footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-to
   <div class="tbl-wrap"><table class="ct" id="ecb-press"><thead><tr><th>이름</th><th>직책</th><th>이메일</th><th>사무실</th><th>휴대전화</th></tr></thead><tbody></tbody></table></div>
   <h3 class="band">Bundesbank 공보실 (Pressestelle)</h3>
   <div class="tbl-wrap"><table class="ct" id="bbk-press"><thead><tr><th>이름</th><th>직책</th><th>이메일</th><th>사무실</th><th>휴대전화</th></tr></thead><tbody></tbody></table></div>
-  <h3 class="band">BaFin 공보 (Pressestelle)</h3>
-  <div class="tbl-wrap"><table class="ct" id="baf-press"><thead><tr><th>이름</th><th>직책</th><th>이메일</th><th>사무실</th><th>휴대전화</th></tr></thead><tbody></tbody></table></div>
-  <h3 class="band">KfW 공보 (Pressestelle)</h3>
-  <div class="tbl-wrap"><table class="ct" id="kfw-press"><thead><tr><th>이름</th><th>직책</th><th>이메일</th><th>사무실</th><th>휴대전화</th></tr></thead><tbody></tbody></table></div>
 </section>
 
 <div class="sources" id="sources"></div>
 </div></main>
-<footer><div class="wrap">2026-11-18 수집 (BaFin·KfW 2026-11-19). 공개 웹페이지와 PDF에서 옮긴 자료로, 인사 이동이 잦으므로 연락 전 원문을 확인하십시오. 부서 하위 조직의 책임자 배치는 조직도 PDF 텍스트를 순서대로 대응시킨 것이며, 대응이 불명확한 경우 이름만 나열했습니다.</div></footer>
+<footer><div class="wrap">2026-11-18 수집. 공개 웹페이지와 PDF에서 옮긴 자료로, 인사 이동이 잦으므로 연락 전 원문을 확인하십시오. 부서 하위 조직의 책임자 배치는 조직도 PDF 텍스트를 순서대로 대응시킨 것이며, 대응이 불명확한 경우 이름만 나열했습니다.</div></footer>
 
 <script>
 // ---------- DATA ----------
@@ -578,158 +541,10 @@ const HV = [
  ["Sachsen und Thüringen","Guido Müller","2024-08~","Straße des 18. Oktober 48, 04103 Leipzig","Postfach 90 11 21, 04358 Leipzig"]
 ];
 
-// BaFin: Organisationsplan Stand 2026-11-04 names no heads below Direktorium, so units carry no h.
-const BAF_BOARD = [
- {name:"Mark Branson", role:"원장 (Präsident)", term:"2021-08~ · 임기 2029년 중반까지 연장", units:[
-  {n:"Stabsstelle PB – Präsidialbüro", ko:"원장실"},
-  {n:"Stabsstelle IR – Innenrevision", ko:"내부감사"}
- ]},
- {name:"Nikolas Speer", role:"부원장 · 은행감독 (Exekutivdirektor Bankenaufsicht)", term:"2025-04~ (Raimund Röseler 후임)", units:[
-  {n:"Abt. BA 1 – Signifikante Institute I", ko:"SSM 중요은행 I", s:[["BA 11 SI-Auslandsbanken I und SI-Spezialbanken I"],["BA 12 SI-Auslandsbanken II"]]},
-  {n:"Abt. BA 2 – SSM-Strategie, Common Procedures und signifikante Institute II", ko:"SSM 전략·공통절차·중요은행 II", s:[["BA 21 SSM Strategie und Koordination"],["BA 22 Common Procedures"],["BA 23 SI-Auslandsbanken III (US, GB)"],["BA 24 Deutsche Bank AG"],["BA 25 DZ BANK AG"],["BA 26 Commerzbank AG und Institutsgruppe UniCredit S.p.A."]]},
-  {n:"Abt. BA 3 – Privat- und Auslandsbanken sowie Bausparkassen und Leasing- und Factoringinstitute", ko:"민간·외국계 은행, 건축저축은행, 리스·팩토링", s:[["BA 35 Captives und Privatbanken mit Schwerpunkt Wholesale"],["BA 36 Privat- und Auslandsbanken mit Schwerpunkt Universal- und Privatkundengeschäft"],["BA 37 Auslandsbanken mit Schwerpunkt Wholesale"],["BA 31–34: Leasing und Factoring I·II, Wertpapiergeschäft/Fintech 특화 은행, Kompetenz Bausparkassen"]]},
-  {n:"Abt. BA 4 – Sparkassen, Genossenschafts-, Förder- und Bürgschaftsbanken", ko:"저축은행·협동조합은행·정책금융기관", s:[["BA 41–43 Genossenschaftsbanken I–III"],["BA 44 Verbundaufsicht"],["BA 45–46 Sparkassen I–II"],["BA 47 KfW-Gruppe, ProCredit, Förder- und Bürgschaftsbanken"]]},
-  {n:"Abt. BA 5 – Grundsatz und Regulierung", ko:"은행감독 정책·규제", s:[["BA 51 Fortentwicklung nationales Recht"],["BA 52 Kreditrisiko"],["BA 53 Kompetenz Pfandbrief, Deckungsprüfungen"],["BA 54 SREP, operationelles Risiko, ESG"],["BA 55 Marktpreisrisiko, Liquidität, Zinsänderungsrisiko"],["BA 56 Bankenaufsicht international"]]},
-  {n:"Abt. BA 6 – Fokusaufsicht und Krisenprävention", ko:"집중감독·위기예방", s:[["BA 61 Restrukturierung und Bilanzrecht"],["BA 62 Einlagensicherung und Anlegerentschädigung"],["BA 63–64 Fokusaufsicht I–II"],["BA 65 Werthaltigkeitsprüfungen"]]},
-  {n:"Abt. CTF – Cyberrisiken und Technologie im Finanzsektor", ko:"사이버리스크·IT 감독"},
-  {n:"Gruppe ZK – Zahlungsinstitute & Kryptogeschäfte nach MiCAR und KWG", ko:"지급기관·가상자산"},
-  {n:"Gruppe SDA – Strategie, Digitalisierung und Analysen", ko:"은행감독 전략·디지털·분석"}
- ]},
- {name:"Rupert Schaefer", role:"부원장 · 전략·정책·안정 (Exekutivdirektor SPS)", term:"Strategie, Policy und Stabilität · 2026-07부터 정리 부문 포함", units:[
-  {n:"Abt. ISRI – Internationales, Sustainability, Risiko, Innovation", ko:"국제협력·지속가능금융·리스크·혁신", s:[["ISRI 1 Technische Kooperation und Beziehungspflege"],["ISRI 2 Internationale Regulierung"]]},
-  {n:"Abt. ABF 1 – Abwicklungsplanung Privatbanken, Steuerung, Krisenmanagement", ko:"정리계획 (민간은행)·위기관리"},
-  {n:"Abt. ABF 2 – Abwicklungsplanung Verbundbanken, Recht, Daten und Bankenabgabe", ko:"정리계획 (저축·협동조합 계열)·정리기금 부담금"},
-  {n:"OE AQ – Aufsichtliche Querschnittsprozesse", ko:"감독 공통업무 (적격성 심사 Referat ZVP 포함)"},
-  {n:"ZR – Zentrale Rechtsabteilung", ko:"법무"},
-  {n:"Gruppe K – Kommunikation", ko:"커뮤니케이션 (공보)"},
-  {n:"Stabsstellen ST · KFT · ZC", ko:"전략·전환 / 집중감독 조정 / 리스크관리·컴플라이언스"}
- ]},
- {name:"Julia Wiens", role:"부원장 · 보험·연금감독 (Exekutivdirektorin VA)", term:"Versicherungs- und Pensionsfondsaufsicht", units:[
-  {n:"Abt. VA 1 – VA 5", ko:"보험사·연금기금 감독 (5개 부서)"},
-  {n:"QRM – Quantitative Risikomodellierung", ko:"계량 리스크 모형 (업권 공통)"},
-  {n:"Gruppe WVA – Wohlverhaltensaufsicht", ko:"보험 영업행위 감독"}
- ]},
- {name:"Dr. Thorsten Pötzsch", role:"부원장 · 증권·자산운용감독 (Exekutivdirektor WA)", term:"Wertpapieraufsicht/Asset-Management", units:[
-  {n:"Abt. WA 1 – Grundsatz, Internationales und Analyse", ko:"증권감독 정책·국제"},
-  {n:"Abt. WA 2 – Marktüberwachung", ko:"시장감시"},
-  {n:"Abt. WA 3 – Marktzugang", ko:"시장 진입 (투자설명서 등)"},
-  {n:"Abt. WA 4 – Wertpapierinstitute und FMI", ko:"증권회사·금융시장인프라"},
-  {n:"Abt. WA 5 – Asset Management", ko:"자산운용"},
-  {n:"VBS – Verbraucherschutz", ko:"금융소비자보호"},
-  {n:"BilKo – Bilanzkontrolle", ko:"회계감리"}
- ]},
- {name:"Birgit Rodolphe", role:"부원장 · 금융범죄대응 (Exekutivdirektorin Anti-Financial Crime)", term:"2026-07 개편 전: Abwicklung und Geldwäscheprävention", units:[
-  {n:"Abt. GW 1 – Geldwäscheprävention (Regulierung und Nichtbankensektor)", ko:"자금세탁방지 정책·비은행", s:[["GW 12 Europa/Internationales"]]},
-  {n:"Abt. GW 2 – Geldwäscheprävention (Strategie und Bankensektor)", ko:"자금세탁방지 은행 부문", s:[["GW 24 GW-Intensiv- und Fokusaufsicht Banken"],["GW 25–27 GW-Aufsicht Bankensektor 1–3"]]},
-  {n:"Abt. IF – Integrität des Finanzsystems", ko:"무인가 영업 단속", s:[["IF 5 Prüfungen, Durchsuchungen, Erlaubnispflicht und Verfolgung (Ausland), Freistellung"]]}
- ]},
- {name:"Silke Deppmeyer", role:"부원장 · 내부행정 (Exekutivdirektorin Innere Verwaltung)", term:"", units:[
-  {n:"Abt. ZI – Personal und Service", ko:"인사·총무"},
-  {n:"Abt. ZII – Finanz-, Immobilien- und Dokumentenmanagement", ko:"재무·시설·문서"},
-  {n:"Abt. IT – Informationstechnik", ko:"정보기술"},
-  {n:"Stabsstelle ZOE – Zentrale Organisationsentwicklung", ko:"조직개발"}
- ]}
-];
-// [부서, 소속, 소관]
-const BAF_KR = [
- ["BA 37 Auslandsbanken mit Schwerpunkt Wholesale","은행감독 BA 3","도매금융 중심 외국계 은행 상시감독. 독일 내 한국계 은행 법인·지점의 담당일 가능성이 가장 큼 (기관별 담당은 공개되지 않아 추정)"],
- ["BA 36 Privat- und Auslandsbanken mit Schwerpunkt Universal- und Privatkundengeschäft","은행감독 BA 3","소매·종합금융 중심 민간·외국계 은행"],
- ["BA 35 Captives und Privatbanken mit Schwerpunkt Wholesale","은행감독 BA 3","자동차금융 등 계열 금융사(Captive). Hyundai Capital Bank Europe 같은 유형"],
- ["BA 56 Bankenaufsicht international","은행감독 BA 5","해외 감독당국과의 은행감독 협력, 국제 기준"],
- ["ISRI 1 Technische Kooperation und Beziehungspflege","SPS · ISRI","해외 감독당국(금융위원회·금융감독원 등)과의 관계 관리"],
- ["GW 2 Geldwäscheprävention (Strategie und Bankensektor)","Anti-Financial Crime","은행의 자금세탁방지 감독 (GW 25–27)"],
- ["OE AQ · Referat ZVP Zuverlässigkeitsprüfungen","SPS","임원 적격성 심사. 인가·대주주 심사 소관은 조직도에서 확인되지 않음"]
-];
-const BAF_PRESS = [
- ["Jacqueline Juknat","Leiterin Kommunikation, 원장 대변인","presse@bafin.de","0228 4108-4629",""],
- ["Harald Hürter","Pressesprecher Bankenaufsicht (은행감독)","harald.huerter@bafin.de","0228 4108-3574",""],
- ["Ann-Kathrin Münzel","Pressesprecherin Strategie, Policy und Stabilität","ann-kathrin.muenzel@bafin.de","0228 4108-4595",""],
- ["Ruprecht Hammerschmidt","Pressesprecher Anti-Financial Crime","ruprecht.hammerschmidt@bafin.de","0228 4108-3135",""],
- ["Dominic Egger","Pressesprecher Wertpapieraufsicht, Asset Management, Bilanzkontrolle, Verbraucherschutz","dominic.egger@bafin.de","0228 4108-2563",""],
- ["Norbert Pieper","Pressesprecher Versicherungs- und Pensionsfondsaufsicht","norbert.pieper@bafin.de","0228 4108-1146",""],
- ["Michael Maurer","Pressesprecher Innere Verwaltung","michael.maurer@bafin.de","0228 4108-4572",""]
-];
-
-// KfW: no published Organigramm; board remits per kfw.de ("u. a."), subsidiaries per their own sites.
-const KFW_BOARD = [
- {name:"Stefan B. Wintels", role:"이사회 의장 (Vorsitzender des Vorstands, CEO)", term:"2021-11~ (2021-10 공동 CEO)", units:[
-  {n:"Konzernsteuerung", ko:"그룹 경영전략·통할"},
-  {n:"KfW Capital – Aufsichtsrat (Vorsitz)", ko:"벤처투자 자회사 감독이사회 의장"}
- ]},
- {name:"Bernd Loewen", role:"재무담당 이사 (CFO)", term:"2009-07~", units:[
-  {n:"Rechnungswesen", ko:"회계"},
-  {n:"Organisation", ko:"조직"},
-  {n:"Personal", ko:"인사"}
- ]},
- {name:"Dr. Stefan Peiß", role:"리스크담당 이사 (CRO)", term:"2016-01~", units:[
-  {n:"Risikomanagement und Risikocontrolling", ko:"리스크관리·통제"},
-  {n:"Compliance (Leitung: Dr. Karsten Hardraht, 겸 Recht)", ko:"컴플라이언스·자금세탁방지", note:"2026-05-11부터 법무 총괄(Chefsyndikus) Hardraht가 컴플라이언스 부문장과 자금세탁방지 책임자를 겸임"},
-  {n:"KfW IPEX-Bank – Aufsichtsrat (stv. Vorsitz)", ko:"IPEX-Bank 감독이사회 부의장"}
- ]},
- {name:"Melanie Kehr", role:"국내 정책금융·수출금융 담당 이사", term:"2019-03~", units:[
-  {n:"Inländische Förderung", ko:"국내 정책금융 (중소기업·주택·인프라·교육)", note:"2025-05부터 담당 (Katharina Herrmann 퇴임)"},
-  {n:"Export- und Projektfinanzierung (KfW IPEX-Bank)", ko:"수출·프로젝트금융 자회사, 감독이사회 의장"}
- ]},
- {name:"Brigitte Réthier", role:"국제금융협력 담당 이사", term:"2026-07-15~ (Christiane Laibach 후임, 임기 4년)", units:[
-  {n:"KfW Entwicklungsbank", ko:"개발은행 (개도국 공적개발금융)"},
-  {n:"DEG – Deutsche Investitions- und Entwicklungsgesellschaft", ko:"개도국 민간부문 투자 자회사"}
- ]},
- {name:"Dr. Susanne Maurenbrecher", role:"IT·운영 담당 이사 (CIO/COO)", term:"2026-10-01~ (임기 3년)", units:[
-  {n:"Informationstechnologie (IT)", ko:"정보기술"},
-  {n:"Operations (OS)", ko:"운영"},
-  {n:"Transaktionsmanagement (TM)", ko:"거래관리"}
- ]}
-];
-const KFW_SUBS = [
- {name:"KfW IPEX-Bank", role:"수출·프로젝트금융 (Geschäftsführung)", term:"Frankfurt · 독립 법인", units:[
-  {n:"Vorsitzende der Geschäftsführung", ko:"CEO: 전략·감사·인사·법무·재무", t:"CEO", h:"Belgin Rudack"},
-  {n:"Industries & Commerce, Energy, Structuring Advisory, London Branch", ko:"산업·에너지", t:"이사", h:"Dr. Velibor Marjanovic"},
-  {n:"Credit Risk, Risk Controlling, Compliance", ko:"리스크 (CRO)", t:"CRO", h:"Claudia Schneider"},
-  {n:"Mobility, Infrastructure, Syndication & Treasury, KfW IPEX-Bank Asia", ko:"모빌리티·인프라·아시아 법인", t:"이사", h:"Aida Welker"}
- ]},
- {name:"DEG", role:"개도국 민간투자 (Geschäftsführung)", term:"Köln · 2026-04 조직도 기준 (원문 미확인)", units:[
-  {n:"Vorsitzender der Geschäftsführung", ko:"대표", t:"CEO", h:"Roland Siller"},
-  {n:"Geschäftsführung", ko:"이사", t:"이사", h:"Monika Beck"},
-  {n:"Geschäftsführung", ko:"이사", t:"이사", h:"Joachim Schumacher"}
- ]},
- {name:"KfW Capital", role:"벤처캐피털 펀드 투자 (Geschäftsführung)", term:"2025-11 보도자료 기준", units:[
-  {n:"Vorsitzender der Geschäftsführung", ko:"대표", t:"CEO", h:"Dr. Jörg Goschin"},
-  {n:"Geschäftsführung", ko:"이사", t:"이사", h:"Alexander Thees"}
- ]},
- {name:"Verwaltungsrat · KfW Research", role:"감독기관·조사부문", term:"감독이사회 의장은 재무·경제장관이 해마다 교대", units:[
-  {n:"Verwaltungsrat – Vorsitz 2026", ko:"감독이사회 의장 (연방경제장관)", t:"의장", h:"Katherina Reiche", d:["Lars Klingbeil (연방재무장관)"]},
-  {n:"KfW Research – Chefvolkswirt", ko:"수석이코노미스트", t:"Chefvolkswirt", h:"Dr. Dirk Schumacher"}
- ]}
-];
-// [부서, 책임자, 소관, 연락 경로]
-const KFW_KR = [
- ["KfW IPEX-Bank Asia Ltd. (Singapore)","Sebastian Fenk (Chief Executive)","남아시아 동쪽 아시아·태평양 전역 수출·프로젝트금융 (한국 포함으로 보이나 명시되지 않음). 서울 사무소 없음","+65 6422 1566 · 6 Shenton Way, OUE Downtown 2, #19-08, Singapore 068809"],
- ["KfW IPEX-Bank – Asia 담당 이사","Aida Welker","IPEX-Bank 이사회에서 아시아 법인 소관","KfW IPEX-Bank 대표 (Frankfurt)"],
- ["Kapitalmarkt / Investor Relations","담당자 미공개","KfW 채권 발행·투자자 관리 (한국 기관투자자의 KfW 채권 투자 창구)","presse@kfw.de · 공보 +49 69 7431-4400"],
- ["KfW Research","Dr. Dirk Schumacher (수석이코노미스트)","경제 분석·전망","공보 Nina Luttmer +49 69 7431-41336"],
- ["KfW Entwicklungsbank – Asien","담당자 미공개","아시아 개도국 개발금융 (한국은 대상 아님)","공보 Dr. Charis Pöthig +49 69 7431-4683"]
-];
-const KFW_PRESS = [
- ["Verena Köttker","Leiterin Konzernkommunikation und Markensteuerung","presse@kfw.de","+49 69 7431-59190",""],
- ["Armin Kloß","Leiter Pressestelle und Interne Kommunikation","armin.kloss@kfw.de","+49 69 7431-3073",""],
- ["Dr. Jobst-Hinrich Wiskow","Leiter Newsroom","presse@kfw.de","+49 69 7431-55519",""],
- ["Wolfram Schweickhardt","CEO-Kommunikation","presse@kfw.de","+49 69 7431-1778",""],
- ["Sybille Bauernfeind","Inland (국내 정책금융)","presse@kfw.de","+49 69 7431-2038",""],
- ["Christine Volk","Inland (국내 정책금융)","presse@kfw.de","+49 69 7431-3867",""],
- ["Frank Brandmaier","Pressesprecher","presse@kfw.de","+49 69 7431-38491",""],
- ["Dr. Charis Pöthig","Ausland (국제·개발금융)","presse@kfw.de","+49 69 7431-4683",""],
- ["Nina Luttmer","KfW Research","presse@kfw.de","+49 69 7431-41336",""],
- ["Sonja Höpfner","KfW Capital","presse@kfw.de","+49 69 7431-4306",""],
- ["Dr. Axel Breitbach","KfW IPEX-Bank","presse@kfw.de","+49 69 7431-2961",""],
- ["Cordula Rinsche","DEG","presse@kfw.de","+49 221 4986-1277",""]
-];
-
 const GENERAL = [
  {t:"ECB 대표", rows:[["주소","Sonnemannstrasse 20, 60314 Frankfurt am Main"],["우편","European Central Bank, 60640 Frankfurt am Main"],["택배","Sonnemannstrasse 22, 60314 Frankfurt am Main"],["대표전화","+49 69 1344 0"],["일반문의","+49 69 1344 1300 (평일 10–12, 14–16시)"],["무료전화","+800 88 01 16 11"],["문의양식","form.ecb.europa.eu/services/rest/publicinformationrequest"]]},
  {t:"ECB 언론·기타", rows:[["언론","media@ecb.europa.eu"],["언론전화","+49 69 1344 7455 (주말·공휴일 당직 연결)"],["웹사이트","webmaster@ecb.europa.eu"],["채용","join-us@ecb.europa.eu"],["브뤼셀 사무소","brussels-office@ecb.europa.eu"],["브뤼셀 주소","Rue de la Science 37, 1040 Bruxelles"]]},
- {t:"Bundesbank 대표", rows:[["주소","Wilhelm-Epstein-Straße 14, 60431 Frankfurt am Main"],["우편","Postfach 10 06 02, 60006 Frankfurt am Main"],["대표전화","069 9566-0"],["이메일","info@bundesbank.de"],["언론","presse@bundesbank.de"],["공보·홍보 전화","069 9566-33512 (평일 8–16시)"]]},
- {t:"BaFin 대표", rows:[["본원 (Bonn)","Graurheindorfer Str. 108, 53117 Bonn"],["Frankfurt","Marie-Curie-Str. 24-28, 60439 Frankfurt am Main"],["대표전화","0228 4108-0"],["팩스","0228 4108-1550"],["이메일","poststelle@bafin.de"],["언론","presse@bafin.de"],["소비자전화","0800 2 100 500 (무료, 평일 8–18시)"],["해외에서","+49 228 299 70 299"]]},
- {t:"KfW 대표", rows:[["본점","Palmengartenstraße 5-9, 60325 Frankfurt am Main"],["대표전화","+49 69 7431-0"],["팩스","069 7431-2944"],["Berlin","Charlottenstraße 33/33a, 10117 Berlin · 030 20264-0"],["Bonn","Ludwig-Erhard-Platz 1-3, 53179 Bonn · 0228 831-0"],["언론","presse@kfw.de"],["언론전화","+49 69 7431-4400 (평일 9–17시)"],["기업 상담","0800 539 9001 (무료)"]]}
+ {t:"Bundesbank 대표", rows:[["주소","Wilhelm-Epstein-Straße 14, 60431 Frankfurt am Main"],["우편","Postfach 10 06 02, 60006 Frankfurt am Main"],["대표전화","069 9566-0"],["이메일","info@bundesbank.de"],["언론","presse@bundesbank.de"],["공보·홍보 전화","069 9566-33512 (평일 8–16시)"]]}
 ];
 
 const ECB_PRESS = [
@@ -800,7 +615,6 @@ const BOK_SUP = [
  ["ECB","DG Specialised Institutions & LSIs","Thomas Broeng Jorgensen","독일 내 한국계 은행 법인(KEB Hana Bank (D), Shinhan Bank Europe, Woori Bank Europe, Hyundai Capital Bank Europe)처럼 덜 중요한 은행(LSI)에 대한 ECB의 간접 감독"],
  ["ECB","Institutional & Sectoral Oversight Division","Anne Fröhling","LSI 감독 총괄 (각국 감독당국 감독 활동의 점검)"],
  ["ECB","SSM Governance & Operations – Authorisation","Ana Campos","은행 인가, 지분 취득 승인 (LSI 포함)"],
- ["BaFin","은행감독 BA 3 – Referat BA 37 Auslandsbanken mit Schwerpunkt Wholesale","부서장 미공개 (부원장 Nikolas Speer)","독일 내 한국계 은행 법인·지점의 직접 감독 당국. 기관별 담당 Referat은 공개되지 않아 BA 37은 추정 (Captive는 BA 35). 자세한 것은 BaFin 탭"],
  ["Bundesbank","Generaldirektorat FA – Finanzaufsicht","Karlheinz Walch","은행감독 총괄 (BaFin과 공동 감독). FA 3 Laufende Aufsicht National이 국내 LSI 상시감독 담당"],
  ["Bundesbank","Hauptverwaltung in Hessen","Dr. Ulf Slopek (본부장)","프랑크푸르트 소재 은행·외국은행 지점의 지역 상시감독 (Regionalbereich Banken und Finanzaufsicht)"],
  ["Bundesbank","Zentralbereich DS – Abt. DS 5 Außenwirtschafts- und Finanzsanktionsprüfungen","Timmermann","외환·국제수지 보고, 금융제재 점검"]
@@ -820,20 +634,6 @@ const SOURCES = [
  ["Bundesbank Organisationsplan der Zentrale (2026-08-01)","https://www.bundesbank.de/resource/blob/604160/695bf2dd308c623a91eb61f14289463e/472B63F073F071307366337C94F8C870/organisationsplan-der-zentrale-data.pdf"],
  ["Bundesbank COO und Bereiche","https://www.bundesbank.de/de/bundesbank/organisation/coo-und-bereiche"],
  ["Bundesbank Pressekontakt","https://www.bundesbank.de/de/presse/pressekontakt"],
- ["BaFin Direktorium","https://www.bafin.de/DE/die-bafin/ueber-die-bafin/organisation/direktorium/direktorium_node.html"],
- ["BaFin Organisationsplan (2026-11-04)","https://www.bafin.de/SharedDocs/Downloads/DE/Liste/dl_organigramm.pdf?__blob=publicationFile&v=14"],
- ["BaFin Pressekontakt","https://www.bafin.de/DE/die-bafin/aktuelles-presse/presse-social-media/pressekontakt/pressekontakt_node.html"],
- ["BaFin Impressum","https://www.bafin.de/DE/service/impressum/impressum_node.html"],
- ["Börsen-Zeitung – Speer, Röseler 후임","https://www.boersen-zeitung.de/personen/nikolas-speer-folgt-auf-bankenaufseher-raimund-roeseler"],
- ["Börsen-Zeitung – BaFin 2026-07 개편","https://www.boersen-zeitung.de/banken-finanzen/mehr-personal-fuer-geldwaesche-und-cyberaufsicht"],
- ["KfW Vorstand","https://www.kfw.de/About-KfW/Arbeitsweise-und-Unternehmensführung/Vorstand/"],
- ["KfW 보도자료 2026-06-17 (Réthier, Kehr)","https://www.kfw.de/Über-die-KfW/Newsroom/Aktuelles/Pressemitteilungen-Details_898112.html"],
- ["KfW 보도자료 2026-03-26 (Maurenbrecher, 감독이사회)","https://www.kfw.de/Über-die-KfW/Newsroom/Aktuelles/Pressemitteilungen-Details_887040.html"],
- ["KfW 보도자료 2026-05-08 (컴플라이언스)","https://www.kfw.de/Über-die-KfW/Newsroom/Aktuelles/Pressemitteilungen-Details_893120.html"],
- ["KfW Kontakt","https://www.kfw.de/Über-die-KfW/Kontakt/"],
- ["KfW Kontakt Pressestelle","https://www.kfw.de/Über-die-KfW/Newsroom/Pressematerial/Kontakt-Pressestelle/"],
- ["KfW IPEX-Bank Management","https://www.kfw-ipex-bank.de/About-us/Organisation/Management-and-bodies/"],
- ["KfW IPEX-Bank Asia (Singapore)","https://www.kfw-ipex-bank.de/Locations/Singapore-Subsidiary/"],
  ["Bundesbank Hauptverwaltungen","https://www.bundesbank.de/de/bundesbank/organisation"]
 ];
 
@@ -843,12 +643,11 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 function unitHTML(u){
   const deps = u.d && u.d.length ? `<span class="deps">부(Deputy): ${u.d.map(esc).join(", ")}</span>` : "";
   const subs = (u.s||[]).map(([n,h,dep]) =>
-    h===undefined && !dep ? `<tr><td colspan="2">${esc(n)}</td></tr>` :
     `<tr><td>${esc(n)}</td><td>${esc(h||"—")}${dep?`<span class="dep">부: ${esc(dep)}</span>`:""}</td></tr>`).join("");
   const body = (subs || u.note) ? `<div class="ubody">${u.note?`<div class="note">${esc(u.note)}</div>`:""}${subs?`<table class="subs"><tbody>${subs}</tbody></table>`:""}</div>` : "";
   return `<details class="unit"${body?"":" data-leaf"}>
     <summary><span class="uname">${esc(u.n)}${u.ko?`<br><span class="uko">${esc(u.ko)}</span>`:""}</span>${body?`<span class="chev" aria-hidden="true">▶</span>`:"<span></span>"}
-    ${u.h?`<span class="uhead"><span class="tag">${esc(u.t)}</span><b>${esc(u.h)}</b></span>`:""}${deps}</summary>${body}</details>`;
+    <span class="uhead"><span class="tag">${esc(u.t)}</span><b>${esc(u.h)}</b></span>${deps}</summary>${body}</details>`;
 }
 function boardHTML(list){
   return list.map(m => `<article class="member"><div class="mh"><span class="name">${esc(m.name)}</span><span class="role">${esc(m.role)}</span>${m.term?`<span class="term">${esc(m.term)}</span>`:""}</div><div class="units">${m.units.map(unitHTML).join("")}</div></article>`).join("");
@@ -871,13 +670,6 @@ document.querySelector("#bok-sup tbody").innerHTML = BOK_SUP.map(([i,d,h,r]) => 
 document.getElementById("general").innerHTML = GENERAL.map(g => `<div class="box"><h4>${esc(g.t)}</h4><dl>${g.rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}${/@|^[+0]\d/.test(v)?copyBtn(v.replace(/\s*\(.*\)$/,"")):""}</dd>`).join("")}</dl></div>`).join("");
 document.querySelector("#ecb-press tbody").innerHTML = pressRows(ECB_PRESS);
 document.querySelector("#bbk-press tbody").innerHTML = pressRows(BBK_PRESS);
-document.getElementById("baf-board").innerHTML = boardHTML(BAF_BOARD);
-document.querySelector("#baf-kr tbody").innerHTML = BAF_KR.map(([d,o,r]) => `<tr><td><b>${esc(d)}</b></td><td>${esc(o)}</td><td>${esc(r)}</td></tr>`).join("");
-document.querySelector("#baf-press tbody").innerHTML = pressRows(BAF_PRESS);
-document.getElementById("kfw-board").innerHTML = boardHTML(KFW_BOARD);
-document.getElementById("kfw-subs").innerHTML = boardHTML(KFW_SUBS);
-document.querySelector("#kfw-kr tbody").innerHTML = KFW_KR.map(([d,h,r,c]) => `<tr><td><b>${esc(d)}</b></td><td>${esc(h)}</td><td>${esc(r)}</td><td>${esc(c)}</td></tr>`).join("");
-document.querySelector("#kfw-press tbody").innerHTML = pressRows(KFW_PRESS);
 document.getElementById("sources").innerHTML = "<b>출처</b>" + SOURCES.map(([t,u]) => `<span>${esc(t)} — <a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https:\/\//,"").slice(0,80))}${u.length>88?"…":""}</a></span>`).join("");
 
 // label every table cell with its column header so phones can show rows as cards
@@ -903,7 +695,7 @@ const views = [...document.querySelectorAll("section[data-view]")];
 function show(){
   const q = document.getElementById("q").value.trim();
   const id = (location.hash||"#ecb").slice(1);
-  const cur = ["ecb","bbk","baf","kfw","bok","contacts"].includes(id) ? id : "ecb";
+  const cur = ["ecb","bbk","bok","contacts"].includes(id) ? id : "ecb";
   views.forEach(v => v.hidden = q ? false : v.dataset.view !== cur);
   document.querySelectorAll("[data-nav]").forEach(a => { if(!q && a.dataset.nav===cur) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
 }
