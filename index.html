@@ -101,6 +101,13 @@ mark{background:var(--mark);color:inherit;border-radius:2px}
 .count{font-size:12px;color:var(--muted);white-space:nowrap}
 footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
 .mtitle{display:none}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:-8px}
+.qi{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px;min-width:0}
+.qi .ql{color:var(--muted);font-size:12px;white-space:nowrap}
+.qi a{color:var(--ink);font-weight:600;text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
+.qi a:hover{text-decoration:underline}
+.qi .copy{margin-left:0;flex-shrink:0}
+.qnote{flex-basis:100%;font-size:12px;color:var(--muted)}
 @media (max-width:460px){.board{grid-template-columns:1fr}.cards2{grid-template-columns:1fr}}
 /* Phone: title scrolls away, only tabs + search stay pinned; tables become stacked cards */
 @media (max-width:700px){
@@ -118,6 +125,10 @@ footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-to
   .ubody{padding:0 14px 12px}
   .subs td:first-child{width:50%}
   .copy{font-size:12px;padding:3px 8px;margin-left:8px;min-height:28px}
+  .quick{display:grid;grid-template-columns:1fr;gap:6px}
+  .qi{justify-content:space-between;padding:10px 12px}
+  .qi .ql{flex:1;min-width:0;white-space:normal}
+  .qi a{font-size:15px;padding-block:4px}
   .tbl-wrap{overflow:visible;background:transparent;border:0;border-radius:0}
   table.ct{min-width:0;display:block}
   .ct thead{display:none}
@@ -160,6 +171,7 @@ footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-to
     <h2>European Central Bank</h2>
     <span class="asof">관리자 명단 2026-10-01 기준 · 집행이사 업무분장 2026-06 기준</span>
   </div>
+  <div class="quick" id="ecb-quick" aria-label="ECB 대표 전화"></div>
   <h3 class="band">집행이사회 (Executive Board) · 담당 부서</h3>
   <div class="board" id="ecb-board"></div>
   <h3 class="band">은행감독 (ECB Banking Supervision / SSM)</h3>
@@ -172,6 +184,7 @@ footer .wrap{padding-block:16px 32px;font-size:12px;color:var(--muted);border-to
     <h2>Deutsche Bundesbank</h2>
     <span class="asof">이사회 담당분야 2026-11 기준 · 부서장 2026-08-01 조직도 기준</span>
   </div>
+  <div class="quick" id="bbk-quick" aria-label="Bundesbank 대표 전화"></div>
   <div class="callout"><span><b>이사 교체</b> Burkhard Balz 이사(제3국) 후임으로 Dr. Philipp Nimmermann이 2026년 11월 취임. 2026-08-01 조직도에는 아직 Balz로 표기되어 있음.</span></div>
   <h3 class="band">이사회 (Vorstand) · 담당 중앙부서</h3>
   <div class="board" id="bbk-board"></div>
@@ -661,6 +674,16 @@ document.getElementById("ecb-board").innerHTML = boardHTML(ECB_BOARD);
 document.getElementById("ecb-ssm").innerHTML = boardHTML(ECB_SSM);
 document.getElementById("ssm-board").textContent = ECB_SSM_BOARD;
 document.getElementById("bbk-board").innerHTML = boardHTML(BBK_BOARD);
+// quick phone strip at the top of each institution tab; tel: links so phones can dial directly
+const QUICK = {
+ "ecb-quick":[["대표","+49 69 1344 0"],["일반문의 (평일 10–12, 14–16시)","+49 69 1344 1300"],["언론","+49 69 1344 7455"]],
+ "bbk-quick":[["대표","069 9566-0"],["공보·홍보 (평일 8–16시)","069 9566-33512"],["언론","presse@bundesbank.de"]]
+};
+const telHref = v => "tel:" + (v.startsWith("0") ? "+49" + v.slice(1) : v).replace(/[^\d+]/g,"");
+Object.entries(QUICK).forEach(([id, rows]) => {
+  document.getElementById(id).innerHTML = rows.map(([k,v]) => `<span class="qi"><span class="ql">${esc(k)}</span><a href="${v.includes("@")?"mailto:"+esc(v):telHref(v)}">${esc(v)}</a>${copyBtn(v)}</span>`).join("")
+   + `<span class="qnote">부서장 직통 번호는 공개되지 않아 대표번호로 연결합니다. 공보실 직원별 번호는 <a href="#contacts">연락처</a> 탭.</span>`;
+});
 document.querySelector("#hv tbody").innerHTML = HV.map(r => `<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td class="mono">${esc(r[2])}</td><td>${esc(r[3])}</td><td>${esc(r[4])}</td></tr>`).join("");
 const boxHTML = g => `<div class="box${g.hl?" hl":""}"><h4>${esc(g.t)}</h4><dl>${g.rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}${/@|^[+0]\d/.test(v)?copyBtn(v.replace(/\s*\(.*\)$/,"")):""}</dd>`).join("")}</dl></div>`;
 document.getElementById("bok-eu").innerHTML = BOK_EU.map(boxHTML).join("");
